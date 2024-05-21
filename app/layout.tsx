@@ -1,11 +1,9 @@
 "use client";
 
 import type { Metadata } from "next";
-//import { Inter } from "next/font/google";
 import { League_Spartan } from "next/font/google";
-import "./globals.css";
+import "../style/globals.css";
 import Header from "@/components/Header";
-//const inter = Inter({ subsets: ["latin"] });
 const LeagueSpartan = League_Spartan({
   subsets: ["latin"],
 });
@@ -34,7 +32,7 @@ export default function RootLayout({
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <html lang="en" className={LeagueSpartan.className}>
-        <body>
+        <body className="lg:flex lg:flex-row ">
           <Header />
           <main>{children}</main>
         </body>
