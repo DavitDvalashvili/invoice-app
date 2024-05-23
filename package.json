@@ -9,10 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-hook/window-size": "^3.1.1",
+    "@rooks/use-window-size": "^4.11.2",
+    "dotenv": "^16.4.5",
+    "env": "^0.0.2",
+    "mongodb": "^6.6.2",
+    "mongoose": "^8.4.0",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^5.2.1"
+    "react-icons": "^5.2.1",
+    "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",
