@@ -55,6 +55,6 @@ InvoiceSchema.set("toJSON", {
 });
 
 // Create the Invoice model
-const Invoice = mongoose.model<IInvoice>("invoices", InvoiceSchema);
+const Invoice = mongoose.model<IInvoice>("invoice", InvoiceSchema);
 
 export default Invoice;
