@@ -17,26 +17,18 @@ const metadata: Metadata = {
   description: "Invoice App created with next.js tailwind.css mongoDB",
 };
 
-export const ThemeContext = createContext<ThemeContextProps>({
-  theme: "light",
-  setTheme: () => {},
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const [theme, setTheme] = useState<string>("light");
-
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      <html lang="en" className={LeagueSpartan.className}>
-        <body className="lg:flex lg:flex-row ">
-          <Header />
-          <main>{children}</main>
-        </body>
-      </html>
-    </ThemeContext.Provider>
+    <html lang="en" className={LeagueSpartan.className}>
+      <body className="lg:flex lg:flex-row">
+        <Header />
+        <main>{children}</main>
+      </body>
+    </html>
   );
 }

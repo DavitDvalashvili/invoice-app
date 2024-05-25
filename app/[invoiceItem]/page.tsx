@@ -1,7 +1,7 @@
 "use client";
 import { InvoiceItemProps } from "@/types/types";
 import { useContext } from "react";
-import { ThemeContext } from "../layout";
+import { ThemeContext } from "../(home)/layout";
 
 const InvoiceItem = ({ params }: InvoiceItemProps) => {
   const themeContext = useContext(ThemeContext);

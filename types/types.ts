@@ -41,3 +41,9 @@ export interface ThemeContextProps {
   theme: string;
   setTheme: (value: string) => void;
 }
+
+export interface ICheckBox {
+  selected: string | null;
+  setSelected: React.Dispatch<React.SetStateAction<string | null>>;
+  status: string;
+}
