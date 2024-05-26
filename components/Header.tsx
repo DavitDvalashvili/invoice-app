@@ -1,7 +1,8 @@
 import Image from "next/image";
+import logo from "@/public/logo.svg";
+import avatar from "@/public/avatar.svg";
 import { IoSunny } from "react-icons/io5";
 import { FaMoon } from "react-icons/fa";
-import { useContext } from "react";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { useState } from "react";
 
@@ -22,7 +23,7 @@ const Header = () => {
     <header className="flex justify-between items-center lg:h-[100vh]  lg:flex-col lg:rounded-tr-[28px] lg:rounded-br-[28px] bg-CarbonBlue dark:bg-Kon">
       {windowWidth && (
         <Image
-          src="/logo.svg"
+          src={logo}
           alt="logo"
           height={windowWidth < 768 ? 72 : windowWidth < 1440 ? 80 : 103}
           width={windowWidth < 768 ? 72 : windowWidth < 1440 ? 80 : 103}
@@ -47,7 +48,7 @@ const Header = () => {
         <div className="px-6 py-[20px] md:px-8 md:py-6 border-l-[1px] border-BlueIndigo lg:border-l-[0px] lg:border-t-[1px]">
           {windowWidth && (
             <Image
-              src="./avatar.svg"
+              src={avatar}
               alt="avatar"
               height={windowWidth < 1440 ? 32 : 40}
               width={windowWidth < 1440 ? 32 : 40}

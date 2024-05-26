@@ -40,7 +40,6 @@ const InvoiceSchema = new Schema<IInvoice>({
   status: {
     type: String,
     default: "draft",
-    enum: ["draft", "pending", "paid"],
   },
   clientAddress: ClientAddressSchema,
   items: [ItemSchema],
@@ -55,6 +54,7 @@ InvoiceSchema.set("toJSON", {
 });
 
 // Create the Invoice model
-const Invoice = mongoose.model<IInvoice>("invoice", InvoiceSchema);
+const Invoice =
+  mongoose.models.invoice || mongoose.model<IInvoice>("invoice", InvoiceSchema);
 
 export default Invoice;

@@ -7,8 +7,6 @@ const CustomCheckbox = ({ selected, setSelected, status }: ICheckBox) => {
     setSelected(value);
   };
 
-  //console.log(selected);
-
   return (
     <label className="flex justify-start items-center gap-[13px] cursor-pointer group">
       <input

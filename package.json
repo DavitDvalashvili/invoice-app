@@ -11,6 +11,8 @@
   "dependencies": {
     "@react-hook/window-size": "^3.1.1",
     "@rooks/use-window-size": "^4.11.2",
+    "axios": "^1.7.2",
+    "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "env": "^0.0.2",
     "mongodb": "^6.6.2",
@@ -24,6 +26,7 @@
     "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
+    "@types/mongoose": "^5.11.97",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

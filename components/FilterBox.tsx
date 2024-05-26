@@ -1,12 +1,15 @@
 import React from "react";
 import CustomCheckbox from "./CustomCheckbox";
-import { useState } from "react";
+import { IFilterBox } from "@/types/types";
 
-const FilterBox = () => {
-  const [selected, setSelected] = useState<null | string>(null);
-
+const FilterBox = ({ selected, setSelected }: IFilterBox) => {
   return (
-    <div className="rounded-lg p-6 w-48 h-32 flex  flex-col gap-4 drop-shadow-2xl shadow-ChillInTheAir dark:shadow-Silver bg-white dark:bg-RoyalCurtsy">
+    <div className="rounded-lg p-6 w-48 h-40 flex  flex-col gap-4 drop-shadow-2xl shadow-ChillInTheAir dark:shadow-Silver bg-white dark:bg-RoyalCurtsy absolute top-[42px]">
+      <CustomCheckbox
+        selected={selected}
+        setSelected={setSelected}
+        status="all"
+      />
       <CustomCheckbox
         selected={selected}
         setSelected={setSelected}
