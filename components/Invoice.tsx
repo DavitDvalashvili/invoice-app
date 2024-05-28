@@ -14,7 +14,7 @@ const Invoice = ({
   const windowWidth = useWindowWidth();
 
   return (
-    <div className="bg-white dark:bg-Kon dark:text-white rounded-lg flex flex-col md:justify-evenly md:flex-row gap-[24px] md:gap-[50px] pt-[25px] px-[24px] pb-[22px] md:py-4 lg:w-[730px] lg:mx-auto">
+    <div className="  cursor-pointer hover:border-VenetianNights border-[1px] border-transparent   bg-white dark:bg-Kon dark:text-white rounded-lg flex flex-col md:justify-evenly md:flex-row gap-[24px] md:gap-[50px] pt-[25px] px-[24px] pb-[22px] md:py-4 lg:w-[730px] lg:mx-auto">
       <div className="flex justify-between items-center md:gap-[28px] md:flex-grow md:justify-between">
         <p className="text-[15px] font-bold leading-[15px] tracking-[-0.25px]">
           <span className="text-TrueLavender">#</span>

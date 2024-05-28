@@ -13,6 +13,7 @@ export interface IItem {
   quantity: number;
   price: number;
   total: number;
+  id: string;
 }
 
 export interface IInvoice extends Document {

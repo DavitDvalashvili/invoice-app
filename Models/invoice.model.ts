@@ -16,6 +16,11 @@ const ItemSchema = new Schema<IItem>({
   quantity: String,
   price: String,
   total: String,
+  id: {
+    type: String,
+    default: generateCustomId,
+    unique: true,
+  },
 });
 
 // Define the Invoice schema
