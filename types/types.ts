@@ -1,31 +1,29 @@
 import mongoose, { Document } from "mongoose";
 
-// Define TypeScript interfaces for the schemas
-export interface IClientAddress {
-  street: string;
-  city: string;
-  postCode: string;
-  country: string;
-}
-
 export interface IItem {
-  name: string;
-  quantity: number;
-  price: number;
-  total: number;
-  id: string;
+  itemName: string;
+  itemQuantity: number | undefined;
+  itemPrice: number | undefined;
+  itemTotal: number;
+  itemId: string;
 }
 
 export interface IInvoice extends Document {
   id: string;
-  createdAt: Date;
-  paymentDue: Date;
-  description: string;
-  paymentTerms: number;
+  street: string;
+  city: string;
+  postCode: string;
+  country: string;
   clientName: string;
   clientEmail: string;
+  clientStreet: String;
+  clientCity: String;
+  clientPostCode: String;
+  clientCountry: String;
+  invoiceDate: Date;
+  paymentTerms: Number;
+  description: String;
   status: string;
-  clientAddress: IClientAddress;
   items: IItem[];
   total: number;
 }
@@ -60,4 +58,11 @@ export interface IInvoiceProp {
   clientName: string;
   status: string;
   total: number;
+}
+
+interface IClientAddress2 {
+  street: string;
+  city: string;
+  postCode: string;
+  country: string;
 }

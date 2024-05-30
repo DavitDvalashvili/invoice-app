@@ -1,22 +1,20 @@
 import mongoose, { Document, Schema } from "mongoose";
 import { generateCustomId } from "@/utils/idGenerator";
-import { IInvoice, IClientAddress, IItem } from "@/types/types";
-
-// Define the ClientAddress schema
-const ClientAddressSchema = new Schema<IClientAddress>({
-  street: String,
-  city: String,
-  postCode: String,
-  country: String,
-});
+import { IInvoice, IItem } from "@/types/types";
 
 // Define the Item schema
-const ItemSchema = new Schema<IItem>({
-  name: String,
-  quantity: String,
-  price: String,
-  total: String,
-  id: {
+const ItemSchema = new Schema({
+  itemName: String,
+  itemQuantity: {
+    type: Number,
+    default: undefined,
+  },
+  itemPrice: {
+    type: Number,
+    default: undefined,
+  },
+  itemTotal: Number,
+  itemId: {
     type: String,
     default: generateCustomId,
     unique: true,
@@ -30,23 +28,26 @@ const InvoiceSchema = new Schema<IInvoice>({
     default: generateCustomId,
     unique: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  paymentDue: {
-    type: Date,
-    default: Date.now,
-  },
-  description: String,
-  paymentTerms: Number,
+  street: String,
+  city: String,
+  postCode: String,
+  country: String,
   clientName: String,
   clientEmail: String,
+  clientStreet: String,
+  clientCity: String,
+  clientPostCode: String,
+  clientCountry: String,
+  invoiceDate: {
+    type: Date,
+    default: Date.now,
+  },
+  paymentTerms: Number,
+  description: String,
   status: {
     type: String,
     default: "draft",
   },
-  clientAddress: ClientAddressSchema,
   items: [ItemSchema],
   total: Number,
 });
