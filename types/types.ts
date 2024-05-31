@@ -59,10 +59,3 @@ export interface IInvoiceProp {
   status: string;
   total: number;
 }
-
-interface IClientAddress2 {
-  street: string;
-  city: string;
-  postCode: string;
-  country: string;
-}

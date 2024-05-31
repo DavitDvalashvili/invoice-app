@@ -1,8 +1,20 @@
 import React, { useState, useRef } from "react";
 import { FaChevronDown } from "react-icons/fa";
+import { useController, Control } from "react-hook-form";
 
-const CustomSelect: React.FC = () => {
-  const [selectedOption, setSelectedOption] = useState<string>("30");
+interface CustomSelectProps {
+  name: string;
+  control: Control<any>;
+}
+
+const CustomSelect: React.FC<CustomSelectProps> = ({ name, control }) => {
+  const {
+    field: { value, onChange },
+  } = useController({
+    name,
+    control,
+  });
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const options = [
     { value: "1", label: "Net 1 Day" },
@@ -14,7 +26,7 @@ const CustomSelect: React.FC = () => {
   const selectRef = useRef<HTMLDivElement>(null);
 
   const handleOptionClick = (value: string) => {
-    setSelectedOption(value);
+    onChange(value);
     setIsOpen(false);
   };
 
@@ -24,7 +36,7 @@ const CustomSelect: React.FC = () => {
         className="w-full bg-white text-red-500 rounded-[2px] border border-gray-300 py-2 px-4 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-blue-500"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {options.find((option) => option.value === selectedOption)?.label}
+        {options.find((option) => option.value === value)?.label}
         <FaChevronDown
           className={`ml-2 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""

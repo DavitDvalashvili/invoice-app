@@ -7,13 +7,13 @@ import { RiDeleteBin7Fill } from "react-icons/ri";
 import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 
 const NewInvoice = () => {
-  //const [itemTotal, setItemTotal] = useState<number>(0);
+  const [itemTotals, setItemTotals] = useState<number[]>([]);
 
-  const ItemObject = {
+  const ItemObject: IItem = {
     itemName: "",
     itemQuantity: undefined,
     itemPrice: undefined,
-    itemTotal: undefined,
+    itemTotal: 0,
     itemId: Math.floor(Math.random() * 1000).toString(),
   };
 
@@ -23,9 +23,12 @@ const NewInvoice = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    setValue,
   } = useForm<IInvoice>({
     defaultValues: {
       items: [ItemObject],
+      paymentTerms: 30,
+      invoiceDate: Date.now,
     },
   });
 
@@ -114,6 +117,7 @@ const NewInvoice = () => {
               <input
                 {...register("clientEmail", {
                   required: "Can't be empty",
+                  maxLength: 20,
                   pattern: {
                     //value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                     message: "Enter a valid email address",
@@ -124,7 +128,7 @@ const NewInvoice = () => {
                 {errors.clientEmail?.message}
               </span>
             </div>
-            <div className="form-group">
+            <div className="">
               <label htmlFor="clientStreet">Street Address</label>
               <input
                 {...register("clientStreet", {
@@ -136,7 +140,7 @@ const NewInvoice = () => {
                 {errors.clientStreet?.message}
               </span>
             </div>
-            <div className="form-group">
+            <div className="">
               <label htmlFor="clientCity">City</label>
               <input
                 {...register("clientCity", {
@@ -148,7 +152,7 @@ const NewInvoice = () => {
                 {errors.clientCity?.message}
               </span>
             </div>
-            <div className="form-group">
+            <div className="">
               <label htmlFor="clientPostCode">Post Code</label>
               <input
                 {...register("clientPostCode", {
@@ -160,7 +164,7 @@ const NewInvoice = () => {
                 {errors.clientPostCode?.message}
               </span>
             </div>
-            <div className="form-group">
+            <div className="">
               <label htmlFor="clientCountry">Country</label>
               <input
                 {...register("clientCountry", {
@@ -172,21 +176,21 @@ const NewInvoice = () => {
                 {errors.clientCountry?.message}
               </span>
             </div>
-            <div className="form-group">
+            <div className="">
               <label htmlFor="invoiceDate">Invoice Date</label>
-              <CustomDatePicker />
+              <CustomDatePicker name="invoiceDate" control={control} />
               <span className="error-message">
                 {errors.invoiceDate?.message}
               </span>
             </div>
-            <div className="form-group">
+            <div className="">
               <label htmlFor="paymentTerms">Payment Terms</label>
-              <CustomSelect />
+              <CustomSelect name="paymentTerms" control={control} />
               <span className="error-message">
                 {errors.paymentTerms?.message}
               </span>
             </div>
-            <div className="form-group">
+            <div className="">
               <label htmlFor="description">Project Description</label>
               <input
                 {...register("description", {
@@ -222,6 +226,22 @@ const NewInvoice = () => {
                     {...register(`items.${index}.itemQuantity`, {
                       required: "Can't be empty",
                     })}
+                    onChange={(e) => {
+                      const quantity: number = parseInt(e.target.value) || 0;
+                      const price: number =
+                        parseInt(watch(`items[${index}].itemPrice`)) || 0;
+                      const total: number = quantity * price;
+
+                      // Update itemTotal in the form state
+                      setValue(`items[${index}].itemTotal`, total);
+
+                      // Update itemTotal in the component state
+                      setItemTotals((prevTotals) => {
+                        const newTotals = [...prevTotals];
+                        newTotals[index] = total;
+                        return newTotals;
+                      });
+                    }}
                   />
                   <span className="">
                     {errors.items?.[index]?.itemQuantity?.message}
@@ -234,6 +254,22 @@ const NewInvoice = () => {
                     {...register(`items.${index}.itemPrice`, {
                       required: "Can't be empty",
                     })}
+                    onChange={(e) => {
+                      const price: number = parseInt(e.target.value) || 0;
+                      const quantity: number =
+                        parseInt(watch(`items[${index}].itemQuantity`)) || 0;
+                      const total: number = quantity * price;
+
+                      // Update itemTotal in the form state
+                      setValue(`items[${index}].itemTotal`, total);
+
+                      // Update itemTotal in the component state
+                      setItemTotals((prevTotals) => {
+                        const newTotals = [...prevTotals];
+                        newTotals[index] = total;
+                        return newTotals;
+                      });
+                    }}
                   />
                   <span className="">
                     {errors.items?.[index]?.itemPrice?.message}
@@ -245,6 +281,7 @@ const NewInvoice = () => {
                     type="number"
                     {...register(`items.${index}.itemTotal`)}
                     readOnly
+                    value={itemTotals[index] || 0}
                   />
                 </div>
                 <RiDeleteBin7Fill onClick={() => remove(index)} />
@@ -255,10 +292,10 @@ const NewInvoice = () => {
             </button>
           </fieldset>
           <div className="button-group">
-            <button type="button" id="discard">
+            <button type="submit" id="discard">
               Discard
             </button>
-            <button type="button" id="draft">
+            <button type="submit" id="draft">
               Save as Draft
             </button>
             <button type="submit" id="send">
