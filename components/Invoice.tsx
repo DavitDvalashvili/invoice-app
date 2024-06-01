@@ -6,7 +6,7 @@ import useWindowWidth from "@/hooks/useWindowWidth";
 
 const Invoice = ({
   id,
-  paymentDue,
+  paymentTerms,
   clientName,
   total,
   status,
@@ -27,7 +27,8 @@ const Invoice = ({
         )}
         {windowWidth && windowWidth >= 768 && (
           <p className="text-[13px] font-medium leading-[15px] tracking-[-0.1px] capitalize text-PurpleImpression dark:text-StoicWhite">
-            Due: {format(new Date(paymentDue), "dd MMM yyyy")}
+            {/* Due: {format(new Date(paymentDue), "dd MMM yyyy")} */}
+            {paymentTerms}
           </p>
         )}
       </div>
@@ -35,7 +36,8 @@ const Invoice = ({
         <div className="flex flex-col md:flex-row md: gap-[9px] md:justify-evenly md:flex-grow items-center">
           {windowWidth && windowWidth < 768 && (
             <p className="text-[13px] font-medium leading-[15px] tracking-[-0.1px] capitalize text-PurpleImpression dark:text-StoicWhite">
-              Due: {format(new Date(paymentDue), "dd MMM yyyy")}
+              {/* Due: {format(new Date(paymentDue), "dd MMM yyyy")} */}
+              {paymentTerms}
             </p>
           )}
           {windowWidth && windowWidth >= 768 && (

@@ -18,9 +18,14 @@ export const POST = async (request: Request): Promise<NextResponse> => {
     if (status === "draft") {
       newInvoice = new Invoice(invoiceBody);
       message = "Invoice created successfully width status draft";
-    } else {
+    } else if (status === "all") {
       newInvoice = new Invoice({ ...invoiceBody, status: "pending" });
       message = "Invoice created successfully with status pending";
+    } else {
+      return NextResponse.json(
+        { message: "Invalid status Api" },
+        { status: 400 }
+      );
     }
 
     await newInvoice.save();
@@ -28,7 +33,6 @@ export const POST = async (request: Request): Promise<NextResponse> => {
     return NextResponse.json({ message }, { status: 201 });
   } catch (error: any) {
     console.error(`Error creating invoice: ${error.message}`);
-
     const status = error.name === "ValidationError" ? 400 : 500;
     return NextResponse.json({ message: error.message }, { status });
   }

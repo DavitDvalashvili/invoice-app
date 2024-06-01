@@ -1,13 +1,16 @@
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import CustomDatePicker from "./CustomDatePicker";
 import CustomSelect from "./CustomSelect";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IItem, IInvoice } from "@/types/types";
 import { RiDeleteBin7Fill } from "react-icons/ri";
 import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
+import { IInputBox } from "@/types/types";
+import axios from "axios";
 
-const NewInvoice = () => {
+const InputBox = ({ setShowInputBox }: IInputBox) => {
   const [itemTotals, setItemTotals] = useState<number[]>([]);
+  const [status, setStatus] = useState<string>("");
 
   const ItemObject: IItem = {
     itemName: "",
@@ -24,15 +27,16 @@ const NewInvoice = () => {
     formState: { errors },
     watch,
     setValue,
+    reset,
   } = useForm<IInvoice>({
     defaultValues: {
       items: [ItemObject],
       paymentTerms: 30,
-      invoiceDate: Date.now,
+      invoiceDate: Date,
     },
   });
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove } = useFieldArray<IItem>({
     control,
     name: "items",
   });
@@ -41,60 +45,95 @@ const NewInvoice = () => {
     append(ItemObject);
   };
 
-  const onSubmit: SubmitHandler<IInvoice> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IInvoice> = async (data) => {
+    try {
+      const response = await axios.post(`/api/invoices/${status}`, data);
+      reset();
+      setShowInputBox(false);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
-    <main className="bg-gray-500">
-      <section className="aside">
-        <p>
-          <MdKeyboardArrowLeft />
-          <span>Go back</span>
+    <>
+      <section className="pt-[33px] px-6 pb-[22px]">
+        <p className="flex justify-start items-center gap-[12.66px] font-bold">
+          <MdKeyboardArrowLeft className="text-VenetianNights text-[22px] leading-[15px]" />
+          <span className="text-[15px], leading-[15px] tracking-[-0.25px] text-RuinedSmores dark:text-white">
+            Go back
+          </span>
         </p>
-        <h3>New Invoice</h3>
+        <h3 className="text-[24px] leading-8 font-bold tracking-[-0.5px] text-RuinedSmores dark:text-white">
+          New Invoice
+        </h3>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <fieldset>
-            <legend>Bill From</legend>
-            <div className="">
-              <label htmlFor="street">Street Address</label>
-              <input
-                {...register("street", {
-                  required: "Can't be empty",
-                  maxLength: 30,
-                })}
-              />
-              <span className="error-message">{errors.street?.message}</span>
-            </div>
-            <div className="">
-              <label htmlFor="city">City</label>
-              <input
-                {...register("city", {
-                  required: "Can't be empty",
-                  maxLength: 30,
-                })}
-              />
-              <span className="error-message">{errors.city?.message}</span>
-            </div>
-            <div className="">
-              <label htmlFor="postCode">Post Code</label>
-              <input
-                {...register("postCode", {
-                  required: "Can't be empty",
-                  maxLength: 6,
-                })}
-              />
-              <span className="error-message">{errors.postCode?.message}</span>
-            </div>
-            <div className="">
-              <label htmlFor="country">Country</label>
-              <input
-                {...register("country", {
-                  required: "Can't be empty",
-                  maxLength: 15,
-                })}
-              />
-              <span className="error-message">{errors.country?.message}</span>
+          <fieldset className="mt-[22px]">
+            <legend className="text-[15px], leading-[15px] tracking-[-0.25px] text-VenetianNights font-bold mb-[24px]">
+              Bill From
+            </legend>
+            <div className="flex flex-col flex-wrap ">
+              <div className="flex flex-row mb-[20px] text-green-600 flex-wrap justify-between">
+                <label
+                  htmlFor="street"
+                  className={`text-[13px] leading-[15px] tracking-[-0.1px]  font-medium ${
+                    errors.street
+                      ? "text-KhmerCurry"
+                      : "dark:text-StoicWhite text-TrueLavender"
+                  }`}
+                >
+                  Street Address
+                </label>
+                <span className="text-[11px], leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid">
+                  {errors.street?.message}
+                </span>
+                <input
+                  // className="w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon border-[1px] "
+                  className={`w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon border-[1px] ${
+                    errors.street
+                      ? "border-KhmerCurry"
+                      : "dark:border-RoyalCurtsy border-StoicWhite"
+                  }`}
+                  {...register("street", {
+                    required: "Can't be empty",
+                    maxLength: 30,
+                  })}
+                />
+              </div>
+              <div className="">
+                <label htmlFor="city">City</label>
+                <input
+                  {...register("city", {
+                    required: "Can't be empty",
+                    maxLength: 30,
+                  })}
+                />
+                <span className="error-message">{errors.city?.message}</span>
+              </div>
+
+              <div className="">
+                <label htmlFor="postCode">Post Code</label>
+                <input
+                  {...register("postCode", {
+                    required: "Can't be empty",
+                    maxLength: 6,
+                  })}
+                />
+                <span className="error-message">
+                  {errors.postCode?.message}
+                </span>
+              </div>
+              <div className="">
+                <label htmlFor="country">Country</label>
+                <input
+                  {...register("country", {
+                    required: "Can't be empty",
+                    maxLength: 15,
+                  })}
+                />
+                <span className="error-message">{errors.country?.message}</span>
+              </div>
             </div>
           </fieldset>
 
@@ -119,7 +158,7 @@ const NewInvoice = () => {
                   required: "Can't be empty",
                   maxLength: 20,
                   pattern: {
-                    //value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                     message: "Enter a valid email address",
                   },
                 })}
@@ -292,20 +331,38 @@ const NewInvoice = () => {
             </button>
           </fieldset>
           <div className="button-group">
-            <button type="submit" id="discard">
+            <button
+              type="button"
+              id="discard"
+              onClick={() => {
+                reset(), setShowInputBox(false);
+              }}
+            >
               Discard
             </button>
-            <button type="submit" id="draft">
+            <button
+              type="submit"
+              id="draft"
+              onClick={() => {
+                setStatus("draft");
+              }}
+            >
               Save as Draft
             </button>
-            <button type="submit" id="send">
+            <button
+              type="submit"
+              id="send"
+              onClick={() => {
+                setStatus("all");
+              }}
+            >
               Save & Send
             </button>
           </div>
         </form>
       </section>
-    </main>
+    </>
   );
 };
 
-export default NewInvoice;
+export default InputBox;

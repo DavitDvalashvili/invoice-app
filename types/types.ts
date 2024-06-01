@@ -46,6 +46,10 @@ export interface IFilterBox {
   setSelected: React.Dispatch<React.SetStateAction<string>>;
 }
 
+export interface IInputBox {
+  setShowInputBox: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 export interface ICheckBox {
   selected: string;
   setSelected: React.Dispatch<React.SetStateAction<string>>;
@@ -54,7 +58,7 @@ export interface ICheckBox {
 
 export interface IInvoiceProp {
   id: string;
-  paymentDue: Date;
+  paymentTerms: Number;
   clientName: string;
   status: string;
   total: number;
