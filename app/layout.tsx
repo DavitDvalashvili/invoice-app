@@ -25,7 +25,7 @@ export default function RootLayout({
   const [theme, setTheme] = useState<string>("light");
   return (
     <html lang="en" className={LeagueSpartan.className}>
-      <body className="lg:flex lg:flex-row bg-ZhēnZhūBáiPearl dark:bg-RiverStyx">
+      <body className="lg:flex lg:flex-row bg-ZhēnZhūBáiPearl dark:bg-RiverStyx ">
         <Header />
         <main className="grow">{children}</main>
       </body>

@@ -37,6 +37,9 @@ const config: Config = {
         PrincetonOrange2: "rgba(255, 143, 0, 0.0571)",
         DarkShamrock: "#33D69F",
         DarkShamrock2: "rgba(51, 214, 159, 0.0571)",
+        Black2: "rgba(0, 0, 0, 0.4984)",
+        StoneWash: "#777F98",
+        WashMe: "#f9fafe",
       },
       screens: {
         lg: "1440px",

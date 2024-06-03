@@ -11,7 +11,7 @@ import useWindowWidth from "@/hooks/useWindowWidth";
 import axios from "axios";
 import { IInvoice } from "@/types/types";
 import Invoice from "@/components/Invoice";
-import NewInvoice from "@/components/InputBox";
+import InputBox from "@/components/InputBox";
 
 export default function Home() {
   const [hideFilterBox, setHideFilterBox] = useState<boolean>(true);
@@ -35,10 +35,10 @@ export default function Home() {
   }, [selected]);
 
   return (
-    <section className="px-6 md:px-12 pt-8 md:pt-[61px] lg:pt-[77px] pb-[105px] md:pb-[173px] lg:pb-[0px] tracking-[-0.75px] relative">
+    <section className="h-[100vh] overflow-y-scroll px-6 md:px-12 pt-8 md:pt-[61px] lg:pt-[77px] pb-[105px] md:pb-[173px] tracking-[-0.75px] relative  ">
       <div
         id="interactiveBox"
-        className="flex justify-between items-center dark:text-white text-RuinedSmores lg:w-[730px] lg:mx-auto"
+        className="flex justify-between items-center dark:text-white text-RuinedSmores lg:w-[730px] lg:mx-auto "
       >
         <div id="title" className="h-10 md:h-[54px]">
           <h3 className="text-2xl md:text-[36px] font-bold leading-[22px] md:leading-[33px]">
@@ -113,8 +113,8 @@ export default function Home() {
       </section>
 
       {showInputBox && (
-        <section className="h-[100vh] w-[100vw] bg-white dark:bg-RiverStyx absolute top-0 left-0">
-          <NewInvoice setShowInputBox={setShowInputBox} />
+        <section className=" w-[100%] absolute top-0 left-0 bg-Black2">
+          <InputBox setShowInputBox={setShowInputBox} />
         </section>
       )}
     </section>

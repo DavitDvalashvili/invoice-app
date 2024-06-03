@@ -37,26 +37,30 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   };
 
   return (
-    <div className="relative w-[150px]" ref={selectRef}>
+    <div className="relative w-full" ref={selectRef}>
       <div
-        className="w-full bg-white text-red-500 rounded-[2px] border border-gray-300 py-2 px-4 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-blue-500"
-        onClick={() => setIsOpen(!isOpen)} // Toggle the dropdown
+        className="cursor-pointer w-full dark:text-white dark:bg-Kon dark:border-RoyalCurtsy bg-white text-RuinedSmores rounded-[4px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] border-StoicWhite border-[1px] pt-[18px] pb-[15px] px-[24px] flex justify-between items-center focus:outline-none"
+        onClick={() => setIsOpen(!isOpen)}
       >
         {options.find((option) => option.value === value)?.label ||
           "Net 7 Days"}
         <FaChevronDown
-          className={`ml-2 transition-transform duration-200 ${
+          className={` text-[12px] transition-transform duration-200 text-VenetianNights ${
             isOpen ? "rotate-180" : ""
           }`}
         />
       </div>
       {isOpen && (
-        <div className="absolute top-full left-0 w-full bg-green-500 shadow-lg rounded-[20px] mt-1 z-10">
-          {options.map((option) => (
+        <div className="absolute text-[15px] leading-[15px] font-bold dark:shadow-[0px_10px_20px_0px_rgba(0,0,0,0.25)] shadow-[0px_10px_20px_0px_rgba(72,84,159,0.25)] tracking-[-0.25px] rounded-[8px] top-full left-0 w-full text-RuinedSmores dark:text-StoicWhite bg-white dark:bg-RoyalCurtsy mt-[8px] z-2">
+          {options.map((option, index) => (
             <div
               key={option.value}
-              className="py-2 px-4 cursor-pointer hover:bg-red-200"
-              onClick={() => handleOptionClick(option.value)} // Handle option click
+              className={`cursor-pointer px-[24px] pt-[16px] pb-[15px] border-b border-solid ${
+                index !== options.length - 1
+                  ? "border-b-[1px]"
+                  : "border-b-[0px]"
+              } border-gray-300 dark:border-b-Kon`}
+              onClick={() => handleOptionClick(option.value)}
             >
               {option.label}
             </div>

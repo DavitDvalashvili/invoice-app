@@ -26,15 +26,16 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
   };
 
   return (
-    <div className="relative inline-block">
+    <div className="relative">
       <DatePicker
         selected={value}
         onChange={onChange}
         placeholderText={formatPlaceholder(new Date())}
         dateFormat="dd MMM yyyy"
-        className="w-full pr-10 pl-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        wrapperClassName="w-full leading-[15px] read-only"
+        className=" w-full mt-[9px] px-[20px] pt-[18px] pb-[15px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold  text-RuinedSmores dark:text-white"
       />
-      <FaRegCalendar className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+      <FaRegCalendar className="absolute right-[16px] top-[25px] w-[16px] heigh-[16px] text-TrueLavender" />
     </div>
   );
 };

@@ -4,4 +4,120 @@
 
 * {
   box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* styling for calendar */
+.react-datepicker__triangle,
+.react-datepicker__day-names {
+  display: none;
+}
+
+.react-datepicker__month-container {
+  box-shadow: 0px 10px 20px 0px rgba(72, 84, 159, 0.25);
+  border-radius: 8px;
+  background-color: white;
+  font-weight: 700;
+  border-radius: 8px !important;
+}
+.dark .react-datepicker {
+  border-radius: 10px !important;
+  background-color: #252945;
+}
+
+.dark .react-datepicker__month-container {
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
+}
+
+.dark .react-datepicker__month-container {
+  background-color: #252945;
+}
+
+.react-datepicker__day {
+  color: #0c0e16 !important;
+  cursor: pointer;
+  font-weight: 700;
+  &:hover {
+    color: #9277ff !important;
+    background-color: white !important;
+  }
+}
+.dark .react-datepicker__day {
+  &:hover {
+    color: #9277ff !important;
+    background-color: #252945 !important;
+  }
+}
+
+.react-datepicker {
+  border: none !important;
+}
+
+.react-datepicker__header {
+  background-color: white !important;
+}
+.dark .react-datepicker__header {
+  background-color: #252945 !important;
+}
+
+.react-datepicker__current-month {
+  color: #0c0e16;
+}
+.dark .react-datepicker__current-month {
+  color: #dfe3fa;
+}
+
+.react-datepicker__header {
+  margin: 26px 0px !important;
+  padding: 0px !important;
+  border: 0px !important;
+}
+.react-datepicker__navigation {
+  margin: 18px 20px !important;
+  padding: 0px !important;
+}
+.react-datepicker__month {
+  padding: 0px 19px 31px 20px !important;
+  margin: 0px !important;
+}
+
+.react-datepicker__day.react-datepicker__day--selected {
+  border: none;
+  background-color: #7c5dfa;
+  color: #0c0e16;
+}
+
+.dark .react-datepicker__day.react-datepicker__day--selected {
+  background-color: #7c5dfa;
+  color: white;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: #7c5dfa !important;
+  cursor: pointer;
+}
+
+/* remove arrows from number-type input */
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
