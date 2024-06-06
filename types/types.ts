@@ -21,11 +21,10 @@ export interface IInvoice extends Document {
   clientPostCode: String;
   clientCountry: String;
   invoiceDate: Date;
-  paymentTerms: Number;
+  paymentTerms: number;
   description: String;
   status: string;
   items: IItem[];
-  total: number;
 }
 
 export interface InvoiceItemParams {
@@ -58,8 +57,9 @@ export interface ICheckBox {
 
 export interface IInvoiceProp {
   id: string;
-  paymentTerms: Number;
+  paymentTerms: number;
   clientName: string;
   status: string;
-  total: number;
+  invoiceDate: Date;
+  items: IItem[];
 }

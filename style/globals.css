@@ -44,6 +44,7 @@
   }
 }
 .dark .react-datepicker__day {
+  color: white !important;
   &:hover {
     color: #9277ff !important;
     background-color: #252945 !important;
@@ -88,11 +89,6 @@
   color: #0c0e16;
 }
 
-.dark .react-datepicker__day.react-datepicker__day--selected {
-  background-color: #7c5dfa;
-  color: white;
-}
-
 .react-datepicker__navigation-icon::before {
   border-color: #7c5dfa !important;
   cursor: pointer;
@@ -118,6 +114,6 @@ input[type="number"] {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 * {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

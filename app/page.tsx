@@ -27,6 +27,7 @@ export default function Home() {
         const response = await axios.get(`api/invoices/${selected}`);
         const data = response.data;
         setInvoicesData(data);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching invoices:", error);
       }
@@ -35,7 +36,7 @@ export default function Home() {
   }, [selected]);
 
   return (
-    <section className="h-[100vh] overflow-y-scroll px-6 md:px-12 pt-8 md:pt-[61px] lg:pt-[77px] pb-[105px] md:pb-[173px] tracking-[-0.75px] relative  ">
+    <section className="h-[100vh]  px-6 md:px-12 pt-8 md:pt-[61px] lg:pt-[77px]  pb-[105px] md:pb-[173px] lg:pb-[0px] tracking-[-0.75px] lg:overflow-y-hidden  ">
       <div
         id="interactiveBox"
         className="flex justify-between items-center dark:text-white text-RuinedSmores lg:w-[730px] lg:mx-auto "
@@ -50,7 +51,7 @@ export default function Home() {
         </div>
         <div
           id="filterBox"
-          className="flex gap-3 md:gap-[15px] font-bold text-[15px] justify-between items-center cursor-pointer"
+          className="flex gap-3 md:gap-[15px] font-bold text-[15px] justify-between items-center cursor-pointer "
         >
           <div className="flex justify-center items-center gap-2 no-wrap relative">
             {windowWidth && (
@@ -98,7 +99,7 @@ export default function Home() {
 
       <section
         id="invoicesBox"
-        className="pt-8 md:pt-[62px] flex flex-col gap-4 transition duration-500 ease-in-out"
+        className="mt-8 md:mt-[62px] flex flex-col gap-4 transition duration-500 ease-in-out  h-[100%] lg:h-[calc(100%-160px)] overflow-y-scroll"
       >
         {invoicesData.map((invoice) => (
           <Invoice
@@ -106,14 +107,15 @@ export default function Home() {
             id={invoice.id}
             paymentTerms={invoice.paymentTerms}
             clientName={invoice.clientName}
-            total={invoice.total}
             status={invoice.status}
+            invoiceDate={invoice.invoiceDate}
+            items={invoice.items}
           />
         ))}
       </section>
 
       {showInputBox && (
-        <section className=" w-[100%] absolute top-0 left-0 bg-Black2">
+        <section className=" w-[100%] lg:w-[calc(100%-104px)] bg-Black2  absolute top-[72px] md:top-[80px] lg:top-0 lg:left-[104px] left-0 max-h-[100vh] overflow-y-scroll">
           <InputBox setShowInputBox={setShowInputBox} />
         </section>
       )}

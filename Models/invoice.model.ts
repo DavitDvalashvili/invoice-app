@@ -49,7 +49,6 @@ const InvoiceSchema = new Schema<IInvoice>({
     default: "draft",
   },
   items: [ItemSchema],
-  total: Number,
 });
 
 InvoiceSchema.set("toJSON", {

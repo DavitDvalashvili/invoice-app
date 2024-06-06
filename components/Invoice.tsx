@@ -3,18 +3,35 @@ import { IInvoiceProp } from "@/types/types";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { format } from "date-fns";
 import useWindowWidth from "@/hooks/useWindowWidth";
+import { IItem } from "@/types/types";
 
 const Invoice = ({
   id,
   paymentTerms,
   clientName,
-  total,
   status,
+  invoiceDate,
+  items,
 }: IInvoiceProp) => {
   const windowWidth = useWindowWidth();
 
+  const invoiceDateConverter = (invoiceDate: Date, paymentTerms: number) => {
+    const timeStamp = new Date(invoiceDate).getTime();
+    const newTimeStamp = timeStamp + paymentTerms * 24 * 60 * 60 * 1000;
+    const formattedDateString = format(newTimeStamp, "dd MMM yyyy");
+    return formattedDateString;
+  };
+
+  const CalculateTotal = (items: IItem[]) => {
+    const total = items.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue.itemTotal;
+    }, 0);
+
+    return total.toFixed(2);
+  };
+
   return (
-    <div className="  cursor-pointer hover:border-VenetianNights border-[1px] border-transparent   bg-white dark:bg-Kon dark:text-white rounded-lg flex flex-col md:justify-evenly md:flex-row gap-[24px] md:gap-[50px] pt-[25px] px-[24px] pb-[22px] md:py-4 lg:w-[730px] lg:mx-auto">
+    <div className="  cursor-pointer hover:border-VenetianNights border-[1px] border-transparent   bg-white dark:bg-Kon dark:text-white rounded-lg flex flex-col md:justify-evenly md:flex-row gap-[24px] md:gap-[50px] pt-[25px] px-[24px] pb-[22px] md:py-4 lg:w-[730px] lg:mx-auto  ">
       <div className="flex justify-between items-center md:gap-[28px] md:flex-grow md:justify-between">
         <p className="text-[15px] font-bold leading-[15px] tracking-[-0.25px]">
           <span className="text-TrueLavender">#</span>
@@ -27,17 +44,15 @@ const Invoice = ({
         )}
         {windowWidth && windowWidth >= 768 && (
           <p className="text-[13px] font-medium leading-[15px] tracking-[-0.1px] capitalize text-PurpleImpression dark:text-StoicWhite">
-            {/* Due: {format(new Date(paymentDue), "dd MMM yyyy")} */}
-            {paymentTerms}
+            {invoiceDateConverter(invoiceDate, paymentTerms)}
           </p>
         )}
       </div>
-      <div className="flex justify-evenly items-center md:flex-grow  md:gap-[40px] md:justify-evenly">
-        <div className="flex flex-col md:flex-row md: gap-[9px] md:justify-evenly md:flex-grow items-center">
+      <div className="flex justify-between items-center md:flex-grow  md:gap-[40px] md:justify-evenly">
+        <div className="flex flex-col md:flex-row md: gap-[9px] md:justify-evenly md:flex-grow items-start md:items-center">
           {windowWidth && windowWidth < 768 && (
             <p className="text-[13px] font-medium leading-[15px] tracking-[-0.1px] capitalize text-PurpleImpression dark:text-StoicWhite">
-              {/* Due: {format(new Date(paymentDue), "dd MMM yyyy")} */}
-              {paymentTerms}
+              {invoiceDateConverter(invoiceDate, paymentTerms)}
             </p>
           )}
           {windowWidth && windowWidth >= 768 && (
@@ -45,12 +60,12 @@ const Invoice = ({
               {clientName}
             </h3>
           )}
-          {total && (
+          {items.length && (
             <div
               id="total"
               className="text-[15px] font-bold leading-[24px] tracking-[-0.25px]"
             >
-              <span>£</span> {total.toLocaleString()}
+              <span>£</span> {CalculateTotal(items)}
             </div>
           )}
         </div>
@@ -68,7 +83,9 @@ const Invoice = ({
           </span>
           <span>{status}</span>
         </p>
-        <MdKeyboardArrowRight className="text-VenetianNights ml-[-20px] text-[22px]" />
+        {windowWidth && windowWidth > 768 && (
+          <MdKeyboardArrowRight className="text-VenetianNights ml-[-20px] text-[22px]" />
+        )}
       </div>
     </div>
   );

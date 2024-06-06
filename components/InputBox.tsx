@@ -50,9 +50,11 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
 
   const onSubmit: SubmitHandler<IInvoice> = async (data) => {
     try {
-      const response = await axios.post(`/api/invoices/${status}`, data);
-      reset();
-      setShowInputBox(false);
+      if (fields.length > 0) {
+        const response = await axios.post(`/api/invoices/${status}`, data);
+        reset();
+        setShowInputBox(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -60,11 +62,16 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
 
   return (
     <>
-      <section className="pt-[33px] md:pt-[59px] px-6 md:px-[56px] pb-[22px] md:pb-[47px] max-w-[616px] bg-white dark:bg-RiverStyx rounded-tr-[20px] rounded-br-[20px] ">
+      <section className="pt-[33px] md:pt-[59px] px-6 md:px-[56px] pb-[22px] md:pb-[47px] max-w-[616px] bg-white dark:bg-RiverStyx rounded-tr-[20px] rounded-br-[20px]">
         {windowWidth && windowWidth < 768 && (
           <p className="flex justify-start items-center gap-[12.66px] font-bold">
             <MdKeyboardArrowLeft className="text-VenetianNights text-[22px] leading-[15px]" />
-            <span className="text-[15px], leading-[15px] tracking-[-0.25px] text-RuinedSmores dark:text-white">
+            <span
+              className="text-[15px], leading-[15px] tracking-[-0.25px] text-RuinedSmores dark:text-white"
+              onClick={() => {
+                reset(), setShowInputBox(false);
+              }}
+            >
               Go back
             </span>
           </p>
@@ -93,7 +100,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                   {errors.street?.message}
                 </span>
                 <input
-                  className={`w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                     errors.street
                       ? "border-KhmerCurry"
                       : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -121,7 +128,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                     {errors.city?.message}
                   </span>
                   <input
-                    className={`w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                    className={`w-full mt-[9px] focus:border-VenetianNights rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                       errors.city
                         ? "border-KhmerCurry"
                         : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -144,11 +151,11 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                   >
                     Post Code
                   </label>
-                  <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid">
+                  <span className="text-[11px] leading-[13px]  tracking-[-0.1px] text-KhmerCurry border-solid">
                     {errors.postCode?.message}
                   </span>
                   <input
-                    className={`w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                    className={`w-full mt-[9px] rounded-[4px] focus:border-VenetianNights bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                       errors.postCode
                         ? "border-KhmerCurry"
                         : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -176,7 +183,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                   {errors.country?.message}
                 </span>
                 <input
-                  className={`w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                     errors.country
                       ? "border-KhmerCurry"
                       : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -210,7 +217,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                   {errors.clientName?.message}
                 </span>
                 <input
-                  className={`w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                     errors.clientName
                       ? "border-KhmerCurry"
                       : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -236,7 +243,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                   {errors.clientEmail?.message}
                 </span>
                 <input
-                  className={`w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                     errors.clientEmail
                       ? "border-KhmerCurry"
                       : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -266,7 +273,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                   {errors.clientStreet?.message}
                 </span>
                 <input
-                  className={`w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                     errors.clientStreet
                       ? "border-KhmerCurry"
                       : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -293,7 +300,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                     {errors.clientCity?.message}
                   </span>
                   <input
-                    className={`w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                    className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                       errors.clientCity
                         ? "border-KhmerCurry"
                         : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -308,7 +315,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                 <div className="flex flex-row mb-[25px] md:mb-[49px] flex-wrap justify-between md:w-[152px]">
                   <label
                     htmlFor="clientPostCode"
-                    className={`text-[13px] leading-[15px] tracking-[-0.1px]  font-medium ${
+                    className={`text-[13px]   leading-[15px] tracking-[-0.1px]  font-medium ${
                       errors.clientPostCode
                         ? "text-KhmerCurry"
                         : "dark:text-StoicWhite text-TrueLavender"
@@ -320,7 +327,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                     {errors.clientPostCode?.message}
                   </span>
                   <input
-                    className={`w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                    className={`w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon focus:border-VenetianNights  border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                       errors.clientPostCode
                         ? "border-KhmerCurry"
                         : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -348,7 +355,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                   {errors.clientCountry?.message}
                 </span>
                 <input
-                  className={`w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                     errors.clientCountry
                       ? "border-KhmerCurry"
                       : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -414,7 +421,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                   {errors.description?.message}
                 </span>
                 <input
-                  className={`w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                     errors.description
                       ? "border-KhmerCurry"
                       : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -428,7 +435,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
             </div>
           </fieldset>
 
-          <fieldset className="pb-[88px] ">
+          <fieldset>
             <legend className="text-[18px] font-bold leading-[32px] tracking-[-0.0375px] text-StoneWash pt-[24px] md:pt-[2px] pb-[22px] md:pb-[14px]">
               Item List
             </legend>
@@ -454,7 +461,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                     </span>
                   )}
                   <input
-                    className={`w-full mt-[15px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px] leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white  ${
+                    className={`w-full mt-[15px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px] leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white  ${
                       errors.items?.[index]?.itemName
                         ? "border-KhmerCurry"
                         : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -477,7 +484,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                       Qty.
                     </label>
                     <input
-                      className={`w-[69px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px] leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white  ${
+                      className={`w-[69px] rounded-[4px] bg-white dark:bg-Kon focus:border-VenetianNights border-[1px] focus:outline-none text-[15px] leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white  ${
                         errors.items?.[index]?.itemQuantity && !Quantity
                           ? "border-KhmerCurry"
                           : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -502,7 +509,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                           return newTotals;
                         });
 
-                        setQuantity(e.target.value);
+                        setQuantity(Number(e.target.value));
                       }}
                     />
                   </div>
@@ -518,7 +525,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                       Price
                     </label>
                     <input
-                      className={`w-[69px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px] leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                      className={`w-[69px] rounded-[4px] bg-white dark:bg-Kon focus:border-VenetianNights border-[1px] focus:outline-none text-[15px] leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                         errors.items?.[index]?.itemPrice && !Price
                           ? "border-KhmerCurry"
                           : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -543,7 +550,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                           return newTotals;
                         });
 
-                        setPrice(e.target.value);
+                        setPrice(Number(e.target.value));
                       }}
                     />
                   </div>
@@ -555,7 +562,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                       Total
                     </label>
                     <input
-                      className="w-[50px] bg-white dark:bg-Kon focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold pt-[18px] pb-[15px] text-PurpleImpression"
+                      className="w-[50px] bg-white dark:bg-Kon focus:outline-none focus:border-VenetianNights text-[15px], leading-[15px] tracking-[-0.25px] font-bold pt-[18px] pb-[15px] text-PurpleImpression"
                       type="number"
                       {...register(`items.${index}.itemTotal`)}
                       readOnly
@@ -563,7 +570,9 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                     />
                   </div>
                   <IoMdTrash
-                    onClick={() => remove(index)}
+                    onClick={() => {
+                      remove(index);
+                    }}
                     className="cursor-pointer w-[20px] h-[100%] pt-[24px] md:pt-[0px] my-auto text-PurpleImpression md:mt-[13px]"
                   />
                 </div>
@@ -571,21 +580,28 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
             ))}
             <button
               type="button"
-              onClick={addItemInputs}
-              className=" w-full py-[18px] text-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-TrueLavender bg-WashMe hover:bg-StoicWhite transition duration-300 ease-in-out dark:bg-RoyalCurtsy dark:text-StoicWhite dark:hover:bg-white transition duration-300 ease-in-out"
+              onClick={() => {
+                addItemInputs();
+              }}
+              className=" w-full py-[18px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] mb-[34px]  text-TrueLavender bg-WashMe hover:bg-StoicWhite transition duration-300 ease-in-out dark:bg-RoyalCurtsy dark:text-StoicWhite dark:hover:bg-white "
             >
               + Add New Item
             </button>
           </fieldset>
+          {fields.length <= 0 && (
+            <span className="text-KhmerCurry text-[13px] font-semibold leading-[15px] tracking-[-0.25px]  block">
+              - An item must be added
+            </span>
+          )}
 
-          <div className=" flex justify-end items-center gap-[8px] mb-[32px]">
+          <div className=" flex justify-end items-center gap-[7px] mb-[32px] mt-[41px]">
             <button
               type="button"
               id="discard"
               onClick={() => {
                 reset(), setShowInputBox(false);
               }}
-              className=" pl-[24px] pr-[23px] pb-[15px] pt-[18px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-TrueLavender bg-WashMe dark:bg-RoyalCurtsy dark:text-StoicWhite hover:bg-StoicWhite dark:hover:bg-white transition duration-300 ease-in-out md:mr-auto "
+              className=" pl-[18px] pr-[19px] pb-[18px] pt-[15px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-TrueLavender bg-WashMe dark:bg-RoyalCurtsy dark:text-StoicWhite hover:bg-StoicWhite dark:hover:bg-white transition duration-300 ease-in-out md:mr-auto "
             >
               Discard
             </button>

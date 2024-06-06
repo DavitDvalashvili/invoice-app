@@ -20,7 +20,7 @@ const Header = () => {
   };
 
   return (
-    <header className="flex justify-between items-center lg:h-[100vh]  lg:flex-col lg:rounded-tr-[28px] lg:rounded-br-[28px] bg-CarbonBlue dark:bg-Kon ">
+    <header className="flex justify-between items-center lg:flex-col lg:rounded-tr-[28px] lg:rounded-br-[28px] bg-CarbonBlue dark:bg-Kon ">
       {windowWidth && (
         <Image
           src={logo}
