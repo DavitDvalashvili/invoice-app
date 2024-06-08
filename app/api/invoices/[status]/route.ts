@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import Invoice from "@/Models/invoice.model";
 import connectDB from "@/config/db";
 
-export const POST = async (request: Request): Promise<NextResponse> => {
+export const POST = async (request: any) => {
   const url = new URL(request.url);
   const pathname = url.pathname;
   const status = pathname.split("/").pop();
@@ -16,10 +16,10 @@ export const POST = async (request: Request): Promise<NextResponse> => {
 
     if (status === "draft") {
       newInvoice = new Invoice(invoiceBody);
-      message = "Invoice created successfully width status draft";
+      message = "Draft created successfully ";
     } else if (status === "all") {
       newInvoice = new Invoice({ ...invoiceBody, status: "pending" });
-      message = "Invoice created successfully with status pending";
+      message = "Invoice created successfully";
     } else {
       return NextResponse.json(
         { message: "Invalid status Api" },
@@ -32,15 +32,17 @@ export const POST = async (request: Request): Promise<NextResponse> => {
     return NextResponse.json({ message }, { status: 201 });
   } catch (error: any) {
     console.error(`Error creating invoice: ${error.message}`);
-    const status = error.name === "ValidationError" ? 400 : 500;
-    return NextResponse.json({ message: error.message }, { status });
+    return NextResponse.json(
+      { message: "Internal server error" },
+      { status: 500 }
+    );
   }
 };
 
 export const GET = async (request: any, response: any) => {
   const { status } = await response.params;
-
   let invoice;
+
   try {
     await connectDB();
 
@@ -54,7 +56,10 @@ export const GET = async (request: any, response: any) => {
     return NextResponse.json(invoice, { status: 200 });
   } catch (error: any) {
     // Log any errors that occur during the fetch operation and Return an error message with a 500 Internal Server Error status
-    console.log(`Error getting invoices ${error.message}`);
-    return NextResponse.json({ message: error.message }, { status: 500 });
+    console.error(`Error getting invoices ${error.message}`);
+    return NextResponse.json(
+      { message: "Internal server error" },
+      { status: 500 }
+    );
   }
 };
