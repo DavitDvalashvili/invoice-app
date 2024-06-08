@@ -7,6 +7,7 @@ import { IItem } from "@/types/types";
 
 const Invoice = ({
   id,
+  number,
   paymentTerms,
   clientName,
   status,
@@ -35,7 +36,7 @@ const Invoice = ({
       <div className="flex justify-between items-center md:gap-[28px] md:flex-grow md:justify-between">
         <p className="text-[15px] font-bold leading-[15px] tracking-[-0.25px]">
           <span className="text-TrueLavender">#</span>
-          {id}
+          {number}
         </p>
         {windowWidth && windowWidth < 768 && (
           <h3 className="text-[13px] font-medium leading-[15px] tracking-[-0.1px] capitalize text-PurpleImpression dark:text-white">

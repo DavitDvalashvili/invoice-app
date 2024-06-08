@@ -9,7 +9,7 @@ export interface IItem {
 }
 
 export interface IInvoice extends Document {
-  id: string;
+  number: string;
   street: string;
   city: string;
   postCode: string;
@@ -57,6 +57,7 @@ export interface ICheckBox {
 
 export interface IInvoiceProp {
   id: string;
+  number: string;
   paymentTerms: number;
   clientName: string;
   status: string;

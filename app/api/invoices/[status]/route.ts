@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import Invoice from "@/Models/invoice.model";
 import connectDB from "@/config/db";
-import { NextApiRequest, NextApiResponse } from "next";
 
 export const POST = async (request: Request): Promise<NextResponse> => {
   const url = new URL(request.url);
@@ -38,15 +37,8 @@ export const POST = async (request: Request): Promise<NextResponse> => {
   }
 };
 
-export const GET = async (
-  request: Request,
-  response: Response
-): Promise<NextResponse> => {
-  // Parse the URL from the request to extract the pathname
-  const url = new URL(request.url);
-  const pathname = url.pathname;
-  // Extract the status parameter from the URL pathname
-  const status = pathname.split("/").pop();
+export const GET = async (request: any, response: any) => {
+  const { status } = await response.params;
 
   let invoice;
   try {

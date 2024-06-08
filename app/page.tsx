@@ -105,6 +105,7 @@ export default function Home() {
           <Invoice
             key={invoice.id}
             id={invoice.id}
+            number={invoice.number}
             paymentTerms={invoice.paymentTerms}
             clientName={invoice.clientName}
             status={invoice.status}

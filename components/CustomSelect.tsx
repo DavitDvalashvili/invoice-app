@@ -39,7 +39,29 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   return (
     <div className="relative w-full" ref={selectRef}>
       <div
-        className="cursor-pointer w-full dark:text-white dark:bg-Kon dark:border-RoyalCurtsy bg-white text-RuinedSmores rounded-[4px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] border-StoicWhite border-[1px] pt-[18px] pb-[15px] px-[24px] flex justify-between items-center focus:outline-none"
+        className={`
+        cursor-pointer 
+        w-full 
+        dark:text-white 
+        dark:bg-Kon 
+        dark:border-RoyalCurtsy 
+        bg-white 
+        text-RuinedSmores 
+        rounded-[4px] 
+        text-[15px] 
+        leading-[15px] 
+        font-bold 
+        tracking-[-0.25px] 
+        border-StoicWhite 
+        border-[1px] 
+        pt-[18px] 
+        pb-[15px] 
+        px-[24px] 
+        flex 
+        justify-between 
+        items-center 
+        ${isOpen ? "border-VenetianNights dark:border-VenetianNights" : ""}
+      `}
         onClick={() => setIsOpen(!isOpen)}
       >
         {options.find((option) => option.value === value)?.label ||

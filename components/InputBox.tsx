@@ -8,6 +8,7 @@ import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 import { IInputBox } from "@/types/types";
 import axios from "axios";
 import useWindowWidth from "@/hooks/useWindowWidth";
+import { v4 as uuidv4 } from "uuid";
 
 const InputBox = ({ setShowInputBox }: IInputBox) => {
   const windowWidth = useWindowWidth();
@@ -21,7 +22,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
     itemQuantity: undefined,
     itemPrice: undefined,
     itemTotal: 0,
-    itemId: Math.floor(Math.random() * 1000).toString(),
+    itemId: uuidv4(),
   };
 
   const {
@@ -56,7 +57,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
         setShowInputBox(false);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -85,22 +86,22 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
               Bill From
             </legend>
             <div className="flex flex-row flex-wrap ">
-              <div className="flex flex-row mb-[25px] flex-wrap justify-between w-full">
+              <div className="flex flex-row mb-[25px] flex-wrap justify-between w-full group">
                 <label
                   htmlFor="street"
                   className={`text-[13px] leading-[15px] tracking-[-0.1px]  font-medium ${
                     errors.street
                       ? "text-KhmerCurry"
                       : "dark:text-StoicWhite text-TrueLavender"
-                  }`}
+                  } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite `}
                 >
                   Street Address
                 </label>
-                <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid">
+                <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite">
                   {errors.street?.message}
                 </span>
                 <input
-                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:focus:border-VenetianNights  dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                     errors.street
                       ? "border-KhmerCurry"
                       : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -113,26 +114,26 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
               </div>
 
               <div className="flex gap-[23px] md:gap-[24px]">
-                <div className="flex flex-row mb-[25px] md:mb-[49px] flex-wrap justify-between md:w-[152px]">
+                <div className="flex flex-row mb-[25px] md:mb-[49px] flex-wrap justify-between md:w-[152px] group">
                   <label
                     htmlFor="city"
                     className={`text-[13px] leading-[15px] tracking-[-0.1px]  font-medium ${
                       errors.city
                         ? "text-KhmerCurry"
                         : "dark:text-StoicWhite text-TrueLavender"
-                    }`}
+                    } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite `}
                   >
                     City
                   </label>
-                  <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid">
+                  <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite">
                     {errors.city?.message}
                   </span>
                   <input
-                    className={`w-full mt-[9px] focus:border-VenetianNights rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                    className={`w-full mt-[9px] focus:border-VenetianNights dark:focus:border-VenetianNights  rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                       errors.city
                         ? "border-KhmerCurry"
                         : "dark:border-RoyalCurtsy border-StoicWhite"
-                    }`}
+                    } `}
                     {...register("city", {
                       required: "Can't be empty",
                       maxLength: 30,
@@ -140,22 +141,22 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                   />
                 </div>
 
-                <div className="flex flex-row mb-[25px] md:mb-[49px] flex-wrap justify-between md:w-[152px]">
+                <div className="flex flex-row mb-[25px] md:mb-[49px] flex-wrap justify-between md:w-[152px] group">
                   <label
                     htmlFor="postCode"
                     className={`text-[13px] leading-[15px] tracking-[-0.1px]  font-medium ${
                       errors.postCode
                         ? "text-KhmerCurry"
                         : "dark:text-StoicWhite text-TrueLavender"
-                    }`}
+                    } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite`}
                   >
                     Post Code
                   </label>
-                  <span className="text-[11px] leading-[13px]  tracking-[-0.1px] text-KhmerCurry border-solid">
+                  <span className="text-[11px] leading-[13px]  tracking-[-0.1px] text-KhmerCurry border-solid group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite">
                     {errors.postCode?.message}
                   </span>
                   <input
-                    className={`w-full mt-[9px] rounded-[4px] focus:border-VenetianNights bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                    className={`w-full mt-[9px] rounded-[4px] focus:border-VenetianNights dark:focus:border-VenetianNights  bg-white dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                       errors.postCode
                         ? "border-KhmerCurry"
                         : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -168,22 +169,22 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                 </div>
               </div>
 
-              <div className="flex flex-row mb-[25px] md:mb-[49px] flex-wrap justify-between w-full md:w-[152px] md:ml-[24px]">
+              <div className="flex flex-row mb-[25px] md:mb-[49px] flex-wrap justify-between w-full md:w-[152px] md:ml-[24px] group">
                 <label
                   htmlFor="country"
                   className={`text-[13px] leading-[15px] tracking-[-0.1px]  font-medium ${
                     errors.country
                       ? "text-KhmerCurry"
                       : "dark:text-StoicWhite text-TrueLavender"
-                  }`}
+                  } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite`}
                 >
                   Country
                 </label>
-                <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid">
+                <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite">
                   {errors.country?.message}
                 </span>
                 <input
-                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:focus:border-VenetianNights  dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                     errors.country
                       ? "border-KhmerCurry"
                       : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -202,22 +203,22 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
               Bill To
             </legend>
             <div className="flex flex-row flex-wrap ">
-              <div className="flex flex-row mb-[25px] flex-wrap justify-between w-full">
+              <div className="flex flex-row mb-[25px] flex-wrap justify-between w-full group">
                 <label
                   htmlFor="clientName"
                   className={`text-[13px] leading-[15px] tracking-[-0.1px]  font-medium ${
                     errors.clientName
                       ? "text-KhmerCurry"
                       : "dark:text-StoicWhite text-TrueLavender"
-                  }`}
+                  } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite`}
                 >
                   Clients Name
                 </label>
-                <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid">
+                <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite">
                   {errors.clientName?.message}
                 </span>
                 <input
-                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:focus:border-VenetianNights  dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                     errors.clientName
                       ? "border-KhmerCurry"
                       : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -228,22 +229,22 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                   })}
                 />
               </div>
-              <div className="flex flex-row mb-[25px] flex-wrap justify-between w-full">
+              <div className="flex flex-row mb-[25px] flex-wrap justify-between w-full group">
                 <label
                   htmlFor="clientEmail"
                   className={`text-[13px] leading-[15px] tracking-[-0.1px]  font-medium ${
                     errors.clientEmail
                       ? "text-KhmerCurry"
                       : "dark:text-StoicWhite text-TrueLavender"
-                  }`}
+                  } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite`}
                 >
                   Clients Email
                 </label>
-                <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid">
+                <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite">
                   {errors.clientEmail?.message}
                 </span>
                 <input
-                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:focus:border-VenetianNights  dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                     errors.clientEmail
                       ? "border-KhmerCurry"
                       : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -258,22 +259,22 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                   })}
                 />
               </div>
-              <div className="flex flex-row mb-[25px] flex-wrap justify-between w-full">
+              <div className="flex flex-row mb-[25px] flex-wrap justify-between w-full group">
                 <label
                   htmlFor="clientStreet"
                   className={`text-[13px] leading-[15px] tracking-[-0.1px]  font-medium ${
                     errors.clientStreet
                       ? "text-KhmerCurry"
                       : "dark:text-StoicWhite text-TrueLavender"
-                  }`}
+                  } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite`}
                 >
                   Street Address
                 </label>
-                <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid">
+                <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite">
                   {errors.clientStreet?.message}
                 </span>
                 <input
-                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:focus:border-VenetianNights  dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                     errors.clientStreet
                       ? "border-KhmerCurry"
                       : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -285,22 +286,22 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                 />
               </div>
               <div className="flex gap-[23px] md:gap-[24px]">
-                <div className="flex flex-row mb-[25px] md:mb-[49px] flex-wrap justify-between md:w-[152px]">
+                <div className="flex flex-row mb-[25px] md:mb-[49px] flex-wrap justify-between md:w-[152px] group">
                   <label
                     htmlFor="clientCity"
                     className={`text-[13px] leading-[15px] tracking-[-0.1px]  font-medium ${
                       errors.clientCity
                         ? "text-KhmerCurry"
                         : "dark:text-StoicWhite text-TrueLavender"
-                    }`}
+                    } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite`}
                   >
                     City
                   </label>
-                  <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid">
+                  <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite">
                     {errors.clientCity?.message}
                   </span>
                   <input
-                    className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                    className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:focus:border-VenetianNights  dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                       errors.clientCity
                         ? "border-KhmerCurry"
                         : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -312,22 +313,22 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                   />
                 </div>
 
-                <div className="flex flex-row mb-[25px] md:mb-[49px] flex-wrap justify-between md:w-[152px]">
+                <div className="flex flex-row mb-[25px] md:mb-[49px] flex-wrap justify-between md:w-[152px] group">
                   <label
                     htmlFor="clientPostCode"
                     className={`text-[13px]   leading-[15px] tracking-[-0.1px]  font-medium ${
                       errors.clientPostCode
                         ? "text-KhmerCurry"
                         : "dark:text-StoicWhite text-TrueLavender"
-                    }`}
+                    } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite`}
                   >
                     Post Code
                   </label>
-                  <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid">
+                  <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite">
                     {errors.clientPostCode?.message}
                   </span>
                   <input
-                    className={`w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon focus:border-VenetianNights  border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                    className={`w-full mt-[9px] rounded-[4px] bg-white dark:bg-Kon focus:border-VenetianNights dark:focus:border-VenetianNights   border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                       errors.clientPostCode
                         ? "border-KhmerCurry"
                         : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -340,22 +341,22 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                 </div>
               </div>
 
-              <div className="flex flex-row mb-[41px] md:mb-[49px] flex-wrap justify-between w-full md:w-[152px] md:ml-[24px]">
+              <div className="flex flex-row mb-[41px] md:mb-[49px] flex-wrap justify-between w-full md:w-[152px] md:ml-[24px] group">
                 <label
                   htmlFor="clientCountry"
                   className={`text-[13px] leading-[15px] tracking-[-0.1px]  font-medium ${
                     errors.clientCountry
                       ? "text-KhmerCurry"
                       : "dark:text-StoicWhite text-TrueLavender"
-                  }`}
+                  } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite`}
                 >
                   Country
                 </label>
-                <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid">
+                <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite">
                   {errors.clientCountry?.message}
                 </span>
                 <input
-                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:focus:border-VenetianNights  dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                     errors.clientCountry
                       ? "border-KhmerCurry"
                       : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -367,18 +368,18 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                 />
               </div>
               <div className="flex flex-row flex-wrap w-full justify-between ">
-                <div className="flex flex-row mb-[25px] md:mb-[49px]  flex-wrap  justify-between w-full md:w-[240px]">
+                <div className="flex flex-row mb-[25px] md:mb-[49px]  flex-wrap  justify-between w-full md:w-[240px] group">
                   <label
                     htmlFor="invoiceDate"
                     className={`text-[13px] leading-[15px] tracking-[-0.1px]  font-medium ${
                       errors.invoiceDate
                         ? "text-KhmerCurry"
                         : "dark:text-StoicWhite text-TrueLavender"
-                    }`}
+                    } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite`}
                   >
                     Invoice Date
                   </label>
-                  <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid">
+                  <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite">
                     {errors.invoiceDate?.message}
                   </span>
                   <div className="w-full">
@@ -386,18 +387,18 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                   </div>
                 </div>
 
-                <div className="flex flex-row mb-[25px] md:mb-[49px] flex-wrap justify-between w-full md:w-[240px] ">
+                <div className="flex flex-row mb-[25px] md:mb-[49px] flex-wrap justify-between w-full md:w-[240px] group">
                   <label
                     htmlFor="paymentTerms"
                     className={`text-[13px] leading-[15px] tracking-[-0.1px]  font-medium ${
                       errors.invoiceDate
                         ? "text-KhmerCurry"
                         : "dark:text-StoicWhite text-TrueLavender"
-                    }`}
+                    } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite`}
                   >
                     Payment Terms
                   </label>
-                  <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid">
+                  <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite ">
                     {errors.paymentTerms?.message}
                   </span>
                   <div className="w-full mt-[9px]">
@@ -406,22 +407,22 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                 </div>
               </div>
 
-              <div className="flex flex-row mb-[25px] flex-wrap justify-between w-full">
+              <div className="flex flex-row mb-[25px] flex-wrap justify-between w-full group">
                 <label
                   htmlFor="description"
                   className={`text-[13px] leading-[15px] tracking-[-0.1px]  font-medium ${
                     errors.description
                       ? "text-KhmerCurry"
                       : "dark:text-StoicWhite text-TrueLavender"
-                  }`}
+                  } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite `}
                 >
                   Project Description
                 </label>
-                <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid">
+                <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite">
                   {errors.description?.message}
                 </span>
                 <input
-                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                  className={`w-full mt-[9px] rounded-[4px] bg-white focus:border-VenetianNights dark:focus:border-VenetianNights  dark:bg-Kon border-[1px] focus:outline-none text-[15px], leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                     errors.description
                       ? "border-KhmerCurry"
                       : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -441,27 +442,27 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
             </legend>
             {fields.map((item, index) => (
               <div
-                key={item.itemId}
+                key={item._id}
                 className="flex flex-col md:flex-row md:gap-[16px] mb-[49px] md:mb-[18px] "
               >
-                <div className="flex flex-row mb-[25px] md:mb-[0px] flex-wrap justify-between w-full md:w-[214px] ">
+                <div className="flex flex-row mb-[25px] md:mb-[0px] flex-wrap justify-between w-full md:w-[214px] group">
                   <label
                     htmlFor={`items[${index}].itemName`}
                     className={`text-[13px] leading-[15px] tracking-[-0.1px] font-medium ${
                       errors.items?.[index]?.itemName
                         ? "text-KhmerCurry"
                         : "dark:text-StoicWhite text-TrueLavender"
-                    }`}
+                    } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite`}
                   >
                     Name
                   </label>
                   {errors.items?.[index]?.itemName && (
-                    <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid">
+                    <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite">
                       {errors.items[index].itemName.message}
                     </span>
                   )}
                   <input
-                    className={`w-full mt-[15px] rounded-[4px] bg-white focus:border-VenetianNights dark:bg-Kon border-[1px] focus:outline-none text-[15px] leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white  ${
+                    className={`w-full mt-[15px] rounded-[4px] bg-white focus:border-VenetianNights dark:focus:border-VenetianNights  dark:bg-Kon border-[1px] focus:outline-none text-[15px] leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white  ${
                       errors.items?.[index]?.itemName
                         ? "border-KhmerCurry"
                         : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -471,20 +472,21 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                     })}
                   />
                 </div>
-                <div className="flex flex-raw gap-[16px] justify-between">
-                  <div className="flex flex-col justify-center items-start gap-[9px] md:gap-[15px] md:justify-start">
+                <div className="flex flex-raw gap-[16px] justify-between ">
+                  <div className="flex flex-col justify-center items-start gap-[9px] md:gap-[15px] md:justify-start group">
                     <label
                       htmlFor={`items[${index}].itemQuantity`}
                       className={`text-[13px] leading-[15px] tracking-[-0.1px] font-medium ${
                         errors.items?.[index]?.itemQuantity && !Quantity
                           ? "text-KhmerCurry"
                           : "dark:text-StoicWhite text-TrueLavender"
-                      }`}
+                      } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite`}
                     >
                       Qty.
                     </label>
                     <input
-                      className={`w-[69px] rounded-[4px] bg-white dark:bg-Kon focus:border-VenetianNights border-[1px] focus:outline-none text-[15px] leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white  ${
+                      min="0"
+                      className={`w-[69px] rounded-[4px] bg-white dark:bg-Kon focus:border-VenetianNights dark:focus:border-VenetianNights  border-[1px] focus:outline-none text-[15px] leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white  ${
                         errors.items?.[index]?.itemQuantity && !Quantity
                           ? "border-KhmerCurry"
                           : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -513,19 +515,20 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                       }}
                     />
                   </div>
-                  <div className="flex flex-col justify-center items-start gap-[9px] md:gap-[15px] md:justify-start">
+                  <div className="flex flex-col justify-center items-start gap-[9px] md:gap-[15px] md:justify-start group">
                     <label
                       htmlFor={`items[${index}].itemPrice`}
                       className={`text-[13px] leading-[15px] tracking-[-0.1px] font-medium ${
                         errors.items?.[index]?.itemPrice && !Price
                           ? "text-KhmerCurry"
                           : "dark:text-StoicWhite text-TrueLavender"
-                      }`}
+                      } group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite`}
                     >
                       Price
                     </label>
                     <input
-                      className={`w-[69px] rounded-[4px] bg-white dark:bg-Kon focus:border-VenetianNights border-[1px] focus:outline-none text-[15px] leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
+                      min="0"
+                      className={`w-[69px] rounded-[4px] bg-white dark:bg-Kon focus:border-VenetianNights dark:focus:border-VenetianNights  border-[1px] focus:outline-none text-[15px] leading-[15px] tracking-[-0.25px] font-bold px-[20px] pt-[18px] pb-[15px] text-RuinedSmores dark:text-white ${
                         errors.items?.[index]?.itemPrice && !Price
                           ? "border-KhmerCurry"
                           : "dark:border-RoyalCurtsy border-StoicWhite"
@@ -562,7 +565,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                       Total
                     </label>
                     <input
-                      className="w-[50px] bg-white dark:bg-Kon focus:outline-none focus:border-VenetianNights text-[15px], leading-[15px] tracking-[-0.25px] font-bold pt-[18px] pb-[15px] text-PurpleImpression"
+                      className="w-[50px] bg-white dark:bg-RiverStyx focus:outline-none focus:border-VenetianNights dark:focus:border-VenetianNights  text-[15px], leading-[15px] tracking-[-0.25px] font-bold pt-[18px] pb-[15px] text-PurpleImpression"
                       type="number"
                       {...register(`items.${index}.itemTotal`)}
                       readOnly

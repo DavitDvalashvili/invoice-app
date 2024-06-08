@@ -1,5 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
-import { generateCustomId } from "@/utils/idGenerator";
+import { generateNumber } from "@/utils/numberGenerator";
 import { IInvoice, IItem } from "@/types/types";
 
 // Define the Item schema
@@ -16,17 +16,16 @@ const ItemSchema = new Schema({
   itemTotal: Number,
   itemId: {
     type: String,
-    default: generateCustomId,
+    default: generateNumber,
     unique: true,
   },
 });
 
 // Define the Invoice schema
 const InvoiceSchema = new Schema<IInvoice>({
-  id: {
+  number: {
     type: String,
-    default: generateCustomId,
-    unique: true,
+    default: generateNumber,
   },
   street: String,
   city: String,
@@ -53,6 +52,7 @@ const InvoiceSchema = new Schema<IInvoice>({
 
 InvoiceSchema.set("toJSON", {
   transform: (document, returnObject) => {
+    returnObject.id = returnObject._id.toString();
     delete returnObject._id;
     delete returnObject.__v;
   },

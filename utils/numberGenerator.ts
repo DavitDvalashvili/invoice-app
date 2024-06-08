@@ -1,5 +1,5 @@
 // Function to generate the custom ID
-export function generateCustomId(): string {
+export function generateNumber(): string {
   const digits = Math.floor(10 + Math.random() * 9000).toString(); // Generate 4 random digits
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let letters = "";

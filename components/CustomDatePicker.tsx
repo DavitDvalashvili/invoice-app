@@ -33,7 +33,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
         placeholderText={formatPlaceholder(new Date())}
         dateFormat="dd MMM yyyy"
         wrapperClassName="w-full leading-[15px] read-only"
-        className=" w-full mt-[9px] px-[20px] pt-[18px] pb-[15px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none focus:border-VenetianNights text-[15px], leading-[15px] tracking-[-0.25px] font-bold  text-RuinedSmores dark:text-white dark:border-RoyalCurtsy border-StoicWhite"
+        className=" w-full mt-[9px] px-[20px] pt-[18px] pb-[15px] rounded-[4px] bg-white dark:bg-Kon border-[1px] focus:outline-none focus:border-VenetianNights dark:focus:border-VenetianNights text-[15px], leading-[15px] tracking-[-0.25px] font-bold  text-RuinedSmores dark:text-white dark:border-RoyalCurtsy border-StoicWhite"
       />
       <FaRegCalendar className="absolute right-[16px] top-[25px] w-[16px] heigh-[16px] text-TrueLavender" />
     </div>
