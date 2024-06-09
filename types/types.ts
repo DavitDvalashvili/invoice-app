@@ -27,12 +27,10 @@ export interface IInvoice extends Document {
   items: IItem[];
 }
 
-export interface InvoiceItemParams {
-  invoiceItem: string;
-}
-
-export interface InvoiceItemProps {
-  params: InvoiceItemParams;
+export interface IInvoiceItemParams {
+  params: {
+    invoiceID: string;
+  };
 }
 
 export interface ThemeContextProps {

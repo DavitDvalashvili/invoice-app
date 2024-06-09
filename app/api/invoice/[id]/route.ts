@@ -9,7 +9,7 @@ export const GET = async (request: any, response: any) => {
     await connectDB();
     let invoice = await Invoice.findById(id);
 
-    if (invoice.length == 0) {
+    if (!invoice) {
       return NextResponse.json(
         { message: "Invoice Not Found" },
         { status: 404 }
