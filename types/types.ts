@@ -41,6 +41,8 @@ export interface ThemeContextProps {
 export interface IFilterBox {
   selected: string;
   setSelected: React.Dispatch<React.SetStateAction<string>>;
+  hideFilterBox: boolean;
+  setHideFilterBox: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IInputBox {

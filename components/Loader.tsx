@@ -20,3 +20,21 @@ const Loader = () => {
 };
 
 export default Loader;
+
+export const LoaderFilter = () => {
+  return (
+    <div className="flex justify-center items-start  mt-[256px]  ">
+      <Oval
+        height={50}
+        width={50}
+        color="#7C5DFA"
+        wrapperStyle={{}}
+        visible={true}
+        ariaLabel="oval-loading"
+        secondaryColor="#7C5DFA"
+        strokeWidth={2}
+        strokeWidthSecondary={2}
+      />
+    </div>
+  );
+};
