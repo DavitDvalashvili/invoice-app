@@ -47,6 +47,8 @@ export interface IFilterBox {
 
 export interface IInputBox {
   setShowInputBox: React.Dispatch<React.SetStateAction<boolean>>;
+  mode: string;
+  invoiceData: IInvoice | null;
 }
 
 export interface ICheckBox {

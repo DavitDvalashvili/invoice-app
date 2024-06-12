@@ -10,7 +10,7 @@ import axios from "axios";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { v4 as uuidv4 } from "uuid";
 
-const InputBox = ({ setShowInputBox }: IInputBox) => {
+const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
   const windowWidth = useWindowWidth();
   const [itemTotals, setItemTotals] = useState<number[]>([]);
   const [status, setStatus] = useState<string>("");
@@ -40,6 +40,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
       invoiceDate: Date,
     },
   });
+
   const { fields, append, remove } = useFieldArray<IItem>({
     control,
     name: "items",
@@ -51,8 +52,15 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
 
   const onSubmit: SubmitHandler<IInvoice> = async (data) => {
     try {
-      if (fields.length > 0) {
+      if (fields.length > 0 && mode === "create") {
         const response = await axios.post(`/api/invoices/${status}`, data);
+        reset();
+        setShowInputBox(false);
+      } else if (fields.length > 0 && mode === "update") {
+        const response = await axios.post(
+          `/api/invoice/${invoiceData.id}`,
+          data
+        );
         reset();
         setShowInputBox(false);
       }
@@ -60,6 +68,14 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    if (mode === "update") {
+      for (const field in invoiceData) {
+        setValue(field, invoiceData[field]);
+      }
+    }
+  }, []);
 
   return (
     <>
@@ -77,9 +93,17 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
             </span>
           </p>
         )}
-        <h3 className="text-[24px] leading-8 font-bold tracking-[-0.5px] text-RuinedSmores dark:text-white mt-[26px] md:mt-0">
-          New Invoice
-        </h3>
+        {mode === "create" && (
+          <h3 className="text-[24px] leading-8 font-bold tracking-[-0.5px] text-RuinedSmores dark:text-white mt-[26px] md:mt-0">
+            New Invoice
+          </h3>
+        )}
+        {mode === "update" && (
+          <h3 className="text-[24px] leading-8 font-bold tracking-[-0.5px] text-RuinedSmores dark:text-white mt-[26px] md:mt-0">
+            Edit <span className="text-PurpleImpression">#</span>
+            {invoiceData.number}
+          </h3>
+        )}
         <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset className="mt-[22px] md:mt-[46px]">
             <legend className="text-[15px], leading-[15px] tracking-[-0.25px] text-VenetianNights font-bold mb-[24px]">
@@ -568,8 +592,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
                       className="w-[50px] bg-white dark:bg-RiverStyx focus:outline-none focus:border-VenetianNights dark:focus:border-VenetianNights  text-[15px], leading-[15px] tracking-[-0.25px] font-bold pt-[18px] pb-[15px] text-PurpleImpression"
                       type="number"
                       {...register(`items.${index}.itemTotal`)}
-                      readOnly
-                      value={itemTotals[index] || 0}
+                      value={itemTotals[index]}
                     />
                   </div>
                   <IoMdTrash
@@ -597,38 +620,61 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
             </span>
           )}
 
-          <div className=" flex justify-end items-center gap-[7px] mb-[32px] mt-[41px]">
-            <button
-              type="button"
-              id="discard"
-              onClick={() => {
-                reset(), setShowInputBox(false);
-              }}
-              className=" pl-[18px] pr-[19px] pt-[18px] pb-[15px]  md:pl-[24px] md:pr-[25px] md:pb-[15px] md:pt-[18px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-TrueLavender bg-WashMe dark:bg-RoyalCurtsy dark:text-StoicWhite hover:bg-StoicWhite dark:hover:bg-white transition duration-300 ease-in-out md:mr-auto "
-            >
-              Discard
-            </button>
-            <button
-              type="submit"
-              id="draft"
-              className="pl-[16.11px] pr-[13.89px]  pb-[15px] pt-[18px] md:pl-[24px] md:pr-[22px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-PurpleImpression bg-CarbonBlue dark:text-StoicWhite hover:bg-RuinedSmores dark:hover:bg-Kon transition duration-300 ease-in-out"
-              onClick={() => {
-                setStatus("draft");
-              }}
-            >
-              Save as Draft
-            </button>
-            <button
-              className="pl-[16px] pr-[15px] md:pl-[24px] md:pr-[23px] pb-[15px] pt-[18px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-white bg-VenetianNights dark:text-StoicWhite hover:bg-ForgottenPurple transition duration-300 ease-in-out"
-              type="submit"
-              id="send"
-              onClick={() => {
-                setStatus("all");
-              }}
-            >
-              Save & Send
-            </button>
-          </div>
+          {mode === "create" && (
+            <div className=" flex justify-end items-center gap-[7px] mb-[32px] mt-[41px]">
+              <button
+                type="button"
+                id="discard"
+                onClick={() => {
+                  reset(), setShowInputBox(false);
+                }}
+                className=" pl-[18px] pr-[19px] pt-[18px] pb-[15px]  md:pl-[24px] md:pr-[25px] md:pb-[15px] md:pt-[18px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-TrueLavender bg-WashMe dark:bg-RoyalCurtsy dark:text-StoicWhite hover:bg-StoicWhite dark:hover:bg-white transition duration-300 ease-in-out md:mr-auto "
+              >
+                Discard
+              </button>
+              <button
+                type="submit"
+                id="draft"
+                className="pl-[16.11px] pr-[13.89px]  pb-[15px] pt-[18px] md:pl-[24px] md:pr-[22px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-PurpleImpression bg-CarbonBlue dark:text-StoicWhite hover:bg-RuinedSmores dark:hover:bg-Kon transition duration-300 ease-in-out"
+                onClick={() => {
+                  setStatus("draft");
+                }}
+              >
+                Save as Draft
+              </button>
+              <button
+                className="pl-[16px] pr-[15px] md:pl-[24px] md:pr-[23px] pb-[15px] pt-[18px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-white bg-VenetianNights dark:text-StoicWhite hover:bg-ForgottenPurple transition duration-300 ease-in-out"
+                type="submit"
+                id="send"
+                onClick={() => {
+                  setStatus("all");
+                }}
+              >
+                Save & Send
+              </button>
+            </div>
+          )}
+          {mode === "update" && (
+            <div className=" flex justify-end items-center gap-[7px] mb-[32px] mt-[41px]">
+              <button
+                type="button"
+                id="discard"
+                onClick={() => {
+                  reset(), setShowInputBox(false);
+                }}
+                className=" pl-[18px] pr-[19px] pt-[18px] pb-[15px]  md:pl-[24px] md:pr-[25px] md:pb-[15px] md:pt-[18px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-TrueLavender bg-WashMe dark:bg-RoyalCurtsy dark:text-StoicWhite hover:bg-StoicWhite dark:hover:bg-white transition duration-300 ease-in-out "
+              >
+                Cancel
+              </button>
+              <button
+                className="pl-[16px] pr-[15px] md:pl-[24px] md:pr-[23px] pb-[15px] pt-[18px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-white bg-VenetianNights dark:text-StoicWhite hover:bg-ForgottenPurple transition duration-300 ease-in-out"
+                type="submit"
+                id="update"
+              >
+                Save Changes
+              </button>
+            </div>
+          )}
         </form>
       </section>
     </>
