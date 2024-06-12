@@ -133,7 +133,11 @@ export default function Invoices() {
 
       {showInputBox && (
         <section className=" w-[100%] lg:w-[calc(100%-104px)] bg-Black2  absolute top-[72px] md:top-[80px] lg:top-0 lg:left-[104px] left-0 max-h-[100vh] overflow-y-scroll">
-          <InputBox setShowInputBox={setShowInputBox} />
+          <InputBox
+            setShowInputBox={setShowInputBox}
+            mode="create"
+            invoiceData={invoicesData[0]}
+          />
         </section>
       )}
     </main>
