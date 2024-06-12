@@ -38,7 +38,7 @@ export default function Invoices() {
   }, [selected]);
 
   return (
-    <section className="h-[100vh]  px-6 md:px-12 pt-8 md:pt-[61px] lg:pt-[77px]  pb-[105px] md:pb-[173px] lg:pb-[0px] tracking-[-0.75px] lg:overflow-y-hidden  ">
+    <main className="h-[100vh]  px-6 md:px-12 pt-8 md:pt-[61px] lg:pt-[77px]  pb-[105px] md:pb-[173px] lg:pb-[0px] tracking-[-0.75px] ">
       <div
         id="interactiveBox"
         className="flex justify-between items-center dark:text-white text-RuinedSmores lg:w-[730px] lg:mx-auto "
@@ -110,7 +110,7 @@ export default function Invoices() {
           {invoicesData.length ? (
             <section
               id="invoicesBox"
-              className="mt-8 md:mt-[62px] flex flex-col gap-4 transition duration-500 ease-in-out  h-[100%] lg:h-[calc(100%-160px)] overflow-y-scroll"
+              className="mt-8 md:mt-[62px] flex flex-col gap-4 transition duration-500 ease-in-out  h-[100%] lg:h-[calc(100%-160px)] lg:min-h-[100vh]"
             >
               {invoicesData.map((invoice) => (
                 <Invoice
@@ -136,6 +136,6 @@ export default function Invoices() {
           <InputBox setShowInputBox={setShowInputBox} />
         </section>
       )}
-    </section>
+    </main>
   );
 }

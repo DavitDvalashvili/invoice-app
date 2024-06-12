@@ -64,3 +64,14 @@ export interface IInvoiceProp {
   invoiceDate: Date;
   items: IItem[];
 }
+
+export interface InvoiceDetailsProps {
+  invoiceData: IInvoice;
+}
+
+export interface IConfirmDeleteProps {
+  number: string | undefined;
+  id: string;
+  showDelete: boolean;
+  setShowDelete: React.Dispatch<React.SetStateAction<boolean>>;
+}

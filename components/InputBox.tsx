@@ -604,14 +604,14 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
               onClick={() => {
                 reset(), setShowInputBox(false);
               }}
-              className=" pl-[18px] pr-[19px] pb-[18px] pt-[15px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-TrueLavender bg-WashMe dark:bg-RoyalCurtsy dark:text-StoicWhite hover:bg-StoicWhite dark:hover:bg-white transition duration-300 ease-in-out md:mr-auto "
+              className=" pl-[18px] pr-[19px] pt-[18px] pb-[15px]  md:pl-[24px] md:pr-[25px] md:pb-[15px] md:pt-[18px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-TrueLavender bg-WashMe dark:bg-RoyalCurtsy dark:text-StoicWhite hover:bg-StoicWhite dark:hover:bg-white transition duration-300 ease-in-out md:mr-auto "
             >
               Discard
             </button>
             <button
               type="submit"
               id="draft"
-              className="pl-[16.11px] pr-[13.89px] pb-[15px] pt-[18px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-PurpleImpression bg-CarbonBlue dark:text-StoicWhite hover:bg-RuinedSmores dark:hover:bg-Kon transition duration-300 ease-in-out"
+              className="pl-[16.11px] pr-[13.89px]  pb-[15px] pt-[18px] md:pl-[24px] md:pr-[22px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-PurpleImpression bg-CarbonBlue dark:text-StoicWhite hover:bg-RuinedSmores dark:hover:bg-Kon transition duration-300 ease-in-out"
               onClick={() => {
                 setStatus("draft");
               }}
@@ -619,7 +619,7 @@ const InputBox = ({ setShowInputBox }: IInputBox) => {
               Save as Draft
             </button>
             <button
-              className="pl-[16px] pr-[15px] pb-[15px] pt-[18px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-white bg-VenetianNights dark:text-StoicWhite hover:bg-ForgottenPurple transition duration-300 ease-in-out"
+              className="pl-[16px] pr-[15px] md:pl-[24px] md:pr-[23px] pb-[15px] pt-[18px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-white bg-VenetianNights dark:text-StoicWhite hover:bg-ForgottenPurple transition duration-300 ease-in-out"
               type="submit"
               id="send"
               onClick={() => {

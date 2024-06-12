@@ -40,6 +40,7 @@ const config: Config = {
         Black2: "rgba(0, 0, 0, 0.4984)",
         StoneWash: "#777F98",
         WashMe: "#f9fafe",
+        blackLight: "rgba(0, 0, 0, 0.4984)",
       },
       screens: {
         lg: "1440px",
