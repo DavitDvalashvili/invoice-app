@@ -19,11 +19,10 @@ export default function Invoices() {
   const [invoicesData, setInvoicesData] = useState<IInvoice[]>([]);
   const [selected, setSelected] = useState<string>("all");
   const [showInputBox, setShowInputBox] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const FetchInvoices = async () => {
-      setLoading(true);
       try {
         const response = await axios.get(`api/invoices/${selected}`);
         const data = response.data;
@@ -35,7 +34,7 @@ export default function Invoices() {
       }
     };
     FetchInvoices();
-  }, [selected]);
+  }, [selected, showInputBox]);
 
   return (
     <main className="h-[100vh]  px-6 md:px-12 pt-8 md:pt-[61px] lg:pt-[77px]  pb-[105px] md:pb-[173px] lg:pb-[0px] tracking-[-0.75px] ">

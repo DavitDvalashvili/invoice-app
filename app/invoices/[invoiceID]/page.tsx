@@ -31,7 +31,6 @@ const Invoice = ({ params }: IInvoiceItemParams) => {
         );
         setUpdating(false);
         fetchInvoice();
-        //console.log(response);
       }
     } catch (error: any) {
       console.error(error.message);
@@ -52,7 +51,7 @@ const Invoice = ({ params }: IInvoiceItemParams) => {
 
   useEffect(() => {
     fetchInvoice();
-  }, [params.invoiceID]);
+  }, [params.invoiceID, showInputBox]);
 
   return (
     <>
@@ -96,7 +95,7 @@ const Invoice = ({ params }: IInvoiceItemParams) => {
                   <div className=" flex justify-end items-center gap-[8px]">
                     <button
                       onClick={() => {
-                        setShowInputBox(true), console.log(showInputBox);
+                        setShowInputBox(true);
                       }}
                       className=" pl-[24px] pr-[23px] pb-[15px] pt-[18px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-TrueLavender bg-WashMe dark:bg-RoyalCurtsy dark:text-StoicWhite hover:bg-StoicWhite dark:hover:bg-white transition duration-300 ease-in-out md:mr-auto "
                     >
@@ -126,7 +125,7 @@ const Invoice = ({ params }: IInvoiceItemParams) => {
               <div className=" flex justify-end items-center gap-[8px] bg-white dark:bg-RoyalCurtsy px-[24px] pt-[21px] pb-[22px]">
                 <button
                   onClick={() => {
-                    setShowInputBox(true), console.log(showInputBox);
+                    setShowInputBox(true);
                   }}
                   className=" pl-[24px] pr-[23px] pb-[15px] pt-[18px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-TrueLavender bg-WashMe dark:bg-RoyalCurtsy dark:text-StoicWhite hover:bg-StoicWhite dark:hover:bg-white transition duration-300 ease-in-out md:mr-auto "
                 >
@@ -134,7 +133,6 @@ const Invoice = ({ params }: IInvoiceItemParams) => {
                 </button>
                 <button
                   onClick={() => {
-                    console.log(showInputBox);
                     setShowDelete(true);
                   }}
                   className="pl-[24px] pr-[25px] pb-[15px] pt-[18px] text-[15px] leading-[15px] font-bold tracking-[-0.25px] rounded-[24px] text-white bg-KhmerCurry hover:bg-AmericanPink transition duration-300 ease-in-out"
