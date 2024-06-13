@@ -37,7 +37,7 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
     defaultValues: {
       items: [ItemObject],
       paymentTerms: 30,
-      invoiceDate: Date,
+      invoiceDate: new Date(),
     },
   });
 
