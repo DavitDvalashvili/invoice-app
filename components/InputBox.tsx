@@ -79,7 +79,7 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
 
   return (
     <>
-      <section className="pt-[33px] md:pt-[59px] px-6 md:px-[56px] pb-[22px] md:pb-[47px] max-w-[616px] bg-white dark:bg-RiverStyx rounded-tr-[20px] rounded-br-[20px]">
+      <section className="pt-[33px] md:pt-[59px] px-6 md:px-[56px] pb-[22px] md:pb-[47px] max-w-[616px] bg-white dark:bg-RiverStyx md:rounded-tr-[20px] md:rounded-br-[20px]">
         {windowWidth && windowWidth < 768 && (
           <p className="flex justify-start items-center gap-[12.66px] font-bold">
             <MdKeyboardArrowLeft className="text-VenetianNights text-[22px] leading-[15px]" />
@@ -187,7 +187,7 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
                     }`}
                     {...register("postCode", {
                       required: "Can't be empty",
-                      maxLength: 6,
+                      maxLength: 10,
                     })}
                   />
                 </div>
@@ -215,7 +215,7 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
                   }`}
                   {...register("country", {
                     required: "Can't be empty",
-                    maxLength: 15,
+                    maxLength: 30,
                   })}
                 />
               </div>
@@ -275,7 +275,7 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
                   }`}
                   {...register("clientEmail", {
                     required: "Can't be empty",
-                    maxLength: 20,
+                    maxLength: 30,
                     pattern: {
                       value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                       message: "Enter a valid email address",
@@ -359,7 +359,7 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
                     }`}
                     {...register("clientPostCode", {
                       required: "Can't be empty",
-                      maxLength: 6,
+                      maxLength: 10,
                     })}
                   />
                 </div>
@@ -387,7 +387,7 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
                   }`}
                   {...register("clientCountry", {
                     required: "Can't be empty",
-                    maxLength: 15,
+                    maxLength: 30,
                   })}
                 />
               </div>
@@ -557,9 +557,12 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
                           ? "border-KhmerCurry"
                           : "dark:border-RoyalCurtsy border-StoicWhite"
                       }`}
-                      type="number"
                       {...register(`items.${index}.itemPrice`, {
                         required: "Can't be empty",
+                        pattern: {
+                          value: /^\d+(\.\d+)?$/,
+                          message: "Enter a valid price",
+                        },
                       })}
                       onChange={(e) => {
                         const price: number = parseInt(e.target.value) || 0;

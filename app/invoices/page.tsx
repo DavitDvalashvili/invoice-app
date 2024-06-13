@@ -13,6 +13,7 @@ import Invoice from "@/components/Invoice";
 import InputBox from "@/components/InputBox";
 import { LoaderFilter } from "@/components/Loader";
 import { NotFoundFilter } from "@/app/not-found";
+import { motion } from "framer-motion";
 
 export default function Invoices() {
   const [hideFilterBox, setHideFilterBox] = useState<boolean>(true);
@@ -131,12 +132,18 @@ export default function Invoices() {
       )}
 
       {showInputBox && (
-        <section className=" w-[100%] lg:w-[calc(100%-104px)] bg-Black2  absolute top-[72px] md:top-[80px] lg:top-0 lg:left-[104px] left-0 max-h-[100vh] overflow-y-scroll">
-          <InputBox
-            setShowInputBox={setShowInputBox}
-            mode="create"
-            invoiceData={invoicesData[0]}
-          />
+        <section className=" w-[100%] lg:w-[calc(100%-104px)] bg-Black2  absolute top-[72px] md:top-[80px] lg:top-0 lg:left-[104px] left-0 lg:max-h-[100vh] overflow-y-scroll">
+          <motion.div
+            initial={{ opacity: 1, x: -500 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <InputBox
+              setShowInputBox={setShowInputBox}
+              mode="create"
+              invoiceData={invoicesData[0]}
+            />
+          </motion.div>
         </section>
       )}
     </main>

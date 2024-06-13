@@ -11,6 +11,7 @@ import useWindowWidth from "@/hooks/useWindowWidth";
 import InvoiceDetails from "@/components/InvoiceDetails";
 import ConfirmDelete from "@/components/ConfirmDelete";
 import InputBox from "@/components/InputBox";
+import { motion } from "framer-motion";
 
 const Invoice = ({ params }: IInvoiceItemParams) => {
   const [invoiceData, setInvoiceData] = useState<IInvoice | null>(null);
@@ -54,7 +55,11 @@ const Invoice = ({ params }: IInvoiceItemParams) => {
   }, [params.invoiceID, showInputBox]);
 
   return (
-    <>
+    <motion.div
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 2 }}
+    >
       <div className="relative lg:static">
         {loading ? (
           <Loader />
@@ -163,14 +168,20 @@ const Invoice = ({ params }: IInvoiceItemParams) => {
       </div>
       {showInputBox && (
         <section className=" w-[100%] lg:w-[calc(100%-104px)] bg-Black2  absolute top-[72px] md:top-[80px] lg:top-0 lg:left-[104px] left-0 lg:max-h-[100vh] overflow-y-scroll">
-          <InputBox
-            setShowInputBox={setShowInputBox}
-            mode="update"
-            invoiceData={invoiceData}
-          />
+          <motion.div
+            initial={{ opacity: 1, x: -500 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <InputBox
+              setShowInputBox={setShowInputBox}
+              mode="update"
+              invoiceData={invoiceData}
+            />
+          </motion.div>
         </section>
       )}
-    </>
+    </motion.div>
   );
 };
 
