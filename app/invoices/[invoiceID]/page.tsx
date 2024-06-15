@@ -2,7 +2,7 @@
 import { IInvoiceItemParams } from "@/types/types";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { IInvoice } from "@/types/types";
+import { IInvoice, IItem } from "@/types/types";
 import Loader from "@/components/Loader";
 import NotFound from "@/app/not-found";
 import Link from "next/link";
@@ -12,9 +12,38 @@ import InvoiceDetails from "@/components/InvoiceDetails";
 import ConfirmDelete from "@/components/ConfirmDelete";
 import InputBox from "@/components/InputBox";
 import { motion } from "framer-motion";
+import { v4 as uuidv4 } from "uuid";
+
+const ItemObject: IItem = {
+  itemName: "",
+  itemQuantity: undefined,
+  itemPrice: undefined,
+  itemTotal: 0,
+  itemId: uuidv4(),
+};
+
+const defaultInvoice: IInvoice = {
+  number: "",
+  street: "",
+  city: "",
+  postCode: "",
+  country: "",
+  clientName: "",
+  clientEmail: "",
+  clientStreet: "",
+  clientCity: "",
+  clientPostCode: "",
+  clientCountry: "",
+  invoiceDate: new Date(),
+  paymentTerms: 30,
+  description: "",
+  status: "",
+  id: "",
+  items: [ItemObject],
+};
 
 const Invoice = ({ params }: IInvoiceItemParams) => {
-  const [invoiceData, setInvoiceData] = useState<IInvoice | null>(null);
+  const [invoiceData, setInvoiceData] = useState<IInvoice>(defaultInvoice);
   const [loading, setLoading] = useState<boolean>(true);
   const windowWidth = useWindowWidth();
   const [Updating, setUpdating] = useState<boolean>(false);

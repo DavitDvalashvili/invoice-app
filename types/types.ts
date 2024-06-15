@@ -8,7 +8,7 @@ export interface IItem {
   itemId: string;
 }
 
-export interface IInvoice extends Document {
+export interface IInvoice {
   number: string;
   street: string;
   city: string;
@@ -25,6 +25,7 @@ export interface IInvoice extends Document {
   description: String;
   status: string;
   items: IItem[];
+  id: string;
 }
 
 export interface IInvoiceItemParams {
@@ -48,7 +49,7 @@ export interface IFilterBox {
 export interface IInputBox {
   setShowInputBox: React.Dispatch<React.SetStateAction<boolean>>;
   mode: string;
-  invoiceData: IInvoice | null;
+  invoiceData: IInvoice;
 }
 
 export interface ICheckBox {

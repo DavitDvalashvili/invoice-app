@@ -2,7 +2,7 @@ import { MdKeyboardArrowLeft } from "react-icons/md";
 import CustomDatePicker from "./CustomDatePicker";
 import CustomSelect from "./CustomSelect";
 import { useState, useEffect } from "react";
-import { IItem, IInvoice } from "@/types/types";
+import { IItem, IInvoice } from "../types/types";
 import { IoMdTrash } from "react-icons/io";
 import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 import { IInputBox } from "@/types/types";
@@ -41,7 +41,7 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
     },
   });
 
-  const { fields, append, remove } = useFieldArray<IItem>({
+  const { fields, append, remove } = useFieldArray<IInvoice | any>({
     control,
     name: "items",
   });
@@ -71,11 +71,11 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
 
   useEffect(() => {
     if (mode === "update") {
-      for (const field in invoiceData) {
+      (Object.keys(invoiceData) as (keyof IInvoice)[]).forEach((field) => {
         setValue(field, invoiceData[field]);
-      }
+      });
     }
-  }, []);
+  }, [mode, invoiceData, setValue]);
 
   return (
     <>
@@ -466,7 +466,7 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
             </legend>
             {fields.map((item, index) => (
               <div
-                key={item._id}
+                key={item.id}
                 className="flex flex-col md:flex-row md:gap-[16px] mb-[49px] md:mb-[18px] "
               >
                 <div className="flex flex-row mb-[25px] md:mb-[0px] flex-wrap justify-between w-full md:w-[214px] group">
@@ -482,7 +482,7 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
                   </label>
                   {errors.items?.[index]?.itemName && (
                     <span className="text-[11px] leading-[13px] tracking-[-0.1px] text-KhmerCurry border-solid group-focus-within:text-TrueLavender group-focus-within:dark:text-StoicWhite">
-                      {errors.items[index].itemName.message}
+                      {errors.items?.[index]?.itemName?.message}
                     </span>
                   )}
                   <input
@@ -521,12 +521,21 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
                       })}
                       onChange={(e) => {
                         const quantity: number = parseInt(e.target.value) || 0;
-                        const price: number =
-                          parseInt(watch(`items[${index}].itemPrice`)) || 0;
+                        const fieldName = `items.${index}.itemPrice` as const; // Assertion to make it a valid key
+                        const priceString = watch(fieldName) as
+                          | string
+                          | undefined;
+                        const price: number = priceString
+                          ? parseInt(priceString)
+                          : 0;
                         const total: number = quantity * price;
 
+                        // Ensure the dynamic field name is type-safe
+                        const itemTotalFieldName =
+                          `items.${index}.itemTotal` as const;
+
                         // Update itemTotal in the form state
-                        setValue(`items[${index}].itemTotal`, total);
+                        setValue(itemTotalFieldName, total);
 
                         // Update itemTotal in the component state
                         setItemTotals((prevTotals) => {
@@ -566,12 +575,22 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
                       })}
                       onChange={(e) => {
                         const price: number = parseInt(e.target.value) || 0;
-                        const quantity: number =
-                          parseInt(watch(`items[${index}].itemQuantity`)) || 0;
+                        const fieldName =
+                          `items.${index}.itemQuantity` as const;
+                        const quantityString = watch(fieldName) as
+                          | string
+                          | undefined;
+                        const quantity: number = quantityString
+                          ? parseInt(quantityString)
+                          : 0;
                         const total: number = quantity * price;
 
+                        // Ensure the dynamic field name is type-safe
+                        const itemTotalFieldName =
+                          `items.${index}.itemTotal` as const;
+
                         // Update itemTotal in the form state
-                        setValue(`items[${index}].itemTotal`, total);
+                        setValue(itemTotalFieldName, total);
 
                         // Update itemTotal in the component state
                         setItemTotals((prevTotals) => {
