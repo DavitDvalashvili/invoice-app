@@ -18,6 +18,7 @@ const Invoice = ({
 }: IInvoiceProp) => {
   const windowWidth = useWindowWidth();
 
+  // Function to convert invoice date to a formatted string
   const invoiceDateConverter = (invoiceDate: Date, paymentTerms: number) => {
     const timeStamp = new Date(invoiceDate).getTime();
     const newTimeStamp = timeStamp + paymentTerms * 24 * 60 * 60 * 1000;
@@ -25,6 +26,7 @@ const Invoice = ({
     return formattedDateString;
   };
 
+  // Function to calculate total invoice amount
   const CalculateTotal = (items: IItem[]) => {
     const total = items.reduce((accumulator, currentValue) => {
       return accumulator + currentValue.itemTotal;

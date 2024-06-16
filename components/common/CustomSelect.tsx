@@ -27,10 +27,11 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
     { value: "7", label: "Net 7 Days" },
     { value: "14", label: "Net 14 Days" },
     { value: "30", label: "Net 30 Days" },
-  ];
+  ]; // Options for the select dropdown
 
   const selectRef = useRef<HTMLDivElement>(null);
 
+  // Function to handle option click and update selected value
   const handleOptionClick = (value: string) => {
     onChange(value); // Update the selected value
     setIsOpen(false); // Close the dropdown

@@ -8,7 +8,7 @@ import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 import { IInputBox } from "@/types/types";
 import axios from "axios";
 import useWindowWidth from "@/hooks/useWindowWidth";
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid"; // Generating unique IDs
 
 const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
   const windowWidth = useWindowWidth();
@@ -17,14 +17,16 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
   const [Price, setPrice] = useState<number>(0);
   const [Quantity, setQuantity] = useState<number>(0);
 
+  // Initial object for a new item
   const ItemObject: IItem = {
     itemName: "",
     itemQuantity: undefined,
     itemPrice: undefined,
     itemTotal: 0,
-    itemId: uuidv4(),
+    itemId: uuidv4(), // Generating unique ID for each item
   };
 
+  // Form handling using react-hook-form
   const {
     register,
     control,
@@ -35,33 +37,38 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
     reset,
   } = useForm<IInvoice>({
     defaultValues: {
-      items: [ItemObject],
-      paymentTerms: 30,
-      invoiceDate: new Date(),
+      items: [ItemObject], // Initial items array with ItemObject
+      paymentTerms: 30, // Default payment terms
+      invoiceDate: new Date(), // Default invoice date
     },
   });
 
+  // Handling dynamic fields array for items
   const { fields, append, remove } = useFieldArray<IInvoice | any>({
     control,
     name: "items",
   });
 
+  // Function to add new item inputs dynamically
   const addItemInputs = () => {
     append(ItemObject);
   };
 
+  // Form submission handler
   const onSubmit: SubmitHandler<IInvoice> = async (data) => {
     try {
       if (fields.length > 0 && mode === "create") {
+        // Handling create mode submission
         const response = await axios.post(`/api/invoices/${status}`, data);
         reset();
         setShowInputBox(false);
       } else if (fields.length > 0 && mode === "update") {
+        // Handling update mode submission
         const response = await axios.post(
           `/api/invoice/${invoiceData.id}`,
           data
         );
-        reset();
+        reset(); // Resetting form fields after successful update
         setShowInputBox(false);
       }
     } catch (error) {
@@ -69,8 +76,10 @@ const InputBox = ({ setShowInputBox, mode, invoiceData }: IInputBox) => {
     }
   };
 
+  // Effect hook to set form values when in update mode
   useEffect(() => {
     if (mode === "update") {
+      // Effect hook to set form values when in update mode
       (Object.keys(invoiceData) as (keyof IInvoice)[]).forEach((field) => {
         setValue(field, invoiceData[field]);
       });

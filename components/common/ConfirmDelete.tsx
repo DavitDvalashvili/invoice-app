@@ -14,6 +14,7 @@ const ConfirmDelete = ({
 
   const router = useRouter();
 
+  // Function to handle deletion of invoice
   const DeleteInvoice = async () => {
     try {
       setDeleting(true);

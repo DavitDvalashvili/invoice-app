@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 const InvoiceDetails = ({ invoiceData }: InvoiceDetailsProps) => {
   const WindowWidth = useWindowWidth();
 
+  // Function to convert invoice date and add payment terms to get due date
   const invoiceDateConverter = (invoiceDate: Date, paymentTerms: number) => {
     const timeStamp = new Date(invoiceDate).getTime();
     const newTimeStamp = timeStamp + paymentTerms * 24 * 60 * 60 * 1000;
@@ -15,6 +16,7 @@ const InvoiceDetails = ({ invoiceData }: InvoiceDetailsProps) => {
     return formattedDateString;
   };
 
+  // Function to calculate total amount from items array
   const CalculateTotal = (items: IItem[]) => {
     const total = items.reduce((accumulator, currentValue) => {
       return accumulator + currentValue.itemTotal;

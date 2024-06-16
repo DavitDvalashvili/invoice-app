@@ -22,6 +22,7 @@ export default function Home() {
   const [showInputBox, setShowInputBox] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
+  // Effect to fetch invoices data based on selected filter or when showInputBox changes
   useEffect(() => {
     const FetchInvoices = async () => {
       try {

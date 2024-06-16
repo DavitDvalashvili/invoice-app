@@ -3,6 +3,7 @@ import { FaCheck } from "react-icons/fa";
 import { ICheckBox } from "@/types/types";
 
 const CustomCheckbox = ({ selected, setSelected, status }: ICheckBox) => {
+  // Function to handle checkbox selection change
   const handleChangeSelection = (value: string) => {
     setSelected(value);
   };

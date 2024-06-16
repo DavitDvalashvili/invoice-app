@@ -4,6 +4,7 @@ import Image from "next/image";
 import notFound from "@/public/notFound.svg";
 import Link from "next/link";
 
+// Component for displaying "Page not found" message
 const NotFound = () => {
   return (
     <div className="flex justify-center items-center flex-col gap-[42px] h-[calc(100vh-72px)] md:h-[calc(100vh-80px)] lg:h-[100vh]">
@@ -32,6 +33,7 @@ const NotFound = () => {
 
 export default NotFound;
 
+// Component for displaying "Nothing here" message
 export const NotFoundFilter = () => {
   return (
     <div className="flex justify-center items-center flex-col gap-[42px] mt-[102px] md:mt-[216px] lg:mt-[147px]">

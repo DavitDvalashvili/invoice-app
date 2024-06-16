@@ -8,6 +8,7 @@ import { useState } from "react";
 const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
+  // Function to toggle dark mode
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
     if (isDarkMode) {

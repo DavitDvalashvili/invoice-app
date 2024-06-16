@@ -14,6 +14,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
   name,
   control,
 }) => {
+  // Using react-hook-form's useController to bind input field to the form
   const {
     field: { value, onChange },
   } = useController({
@@ -21,6 +22,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
     control,
   });
 
+  // Function to format placeholder text based on selected date
   const formatPlaceholder = (date: Date) => {
     return format(date, "dd MMM yyyy");
   };
