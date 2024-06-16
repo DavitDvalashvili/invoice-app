@@ -133,7 +133,7 @@ const InvoiceDetails = ({ invoiceData }: InvoiceDetailsProps) => {
                     </div>
                   )}
                   {WindowWidth && WindowWidth >= 768 && (
-                    <div className="md:w-[60px] md:text-center">
+                    <div className="md:w-[70px] md:text-center">
                       {WindowWidth && WindowWidth >= 768 && index == 0 && (
                         <h3 className=" text-[13px] leading-[18px] font-medium tracking-[-0.1px] text-TrueLavender dark:text-StoicWhite mb-[32px]">
                           Price
