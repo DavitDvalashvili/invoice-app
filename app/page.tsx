@@ -3,15 +3,15 @@
 import { useContext, useEffect } from "react";
 import React, { useState } from "react";
 import Image from "next/image";
-import FilterBox from "@/components/FilterBox";
+import FilterBox from "@/components/common/FilterBox";
 import AddInvoice from "@/public/AddInvoice.svg";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import axios from "axios";
 import { IInvoice } from "@/types/types";
-import Invoice from "@/components/Invoice";
-import InputBox from "@/components/InputBox";
-import { LoaderFilter } from "@/components/Loader";
+import Invoice from "@/components/invoice/Invoice";
+import InputBox from "@/components/common/InputBox";
+import { LoaderFilter } from "@/components/common/Loader";
 import { NotFoundFilter } from "@/app/not-found";
 import { motion } from "framer-motion";
 

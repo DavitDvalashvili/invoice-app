@@ -3,14 +3,14 @@ import { IInvoiceItemParams } from "@/types/types";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { IInvoice, IItem } from "@/types/types";
-import Loader from "@/components/Loader";
+import Loader from "@/components/common/Loader";
 import NotFound from "@/app/not-found";
 import Link from "next/link";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import useWindowWidth from "@/hooks/useWindowWidth";
-import InvoiceDetails from "@/components/InvoiceDetails";
-import ConfirmDelete from "@/components/ConfirmDelete";
-import InputBox from "@/components/InputBox";
+import InvoiceDetails from "@/components/invoice/InvoiceDetails";
+import ConfirmDelete from "@/components/common/ConfirmDelete";
+import InputBox from "@/components/common/InputBox";
 import { motion } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
 

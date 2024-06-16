@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 import { League_Spartan } from "next/font/google";
 import "@/style/globals.css";
-import Header from "@/components/Header";
+import Header from "@/components/layout/Header";
 const LeagueSpartan = League_Spartan({
   subsets: ["latin"],
 });

@@ -2,7 +2,7 @@ import { MdKeyboardArrowLeft } from "react-icons/md";
 import CustomDatePicker from "./CustomDatePicker";
 import CustomSelect from "./CustomSelect";
 import { useState, useEffect } from "react";
-import { IItem, IInvoice } from "../types/types";
+import { IItem, IInvoice } from "../../types/types";
 import { IoMdTrash } from "react-icons/io";
 import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 import { IInputBox } from "@/types/types";
