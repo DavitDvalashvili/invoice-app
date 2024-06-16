@@ -14,18 +14,18 @@
 
 ### Prerequisites
 
-- <img src="client/public/readme/npm.png" width="25" style="top: 8px" /> _npm: Node Package Manager for JavaScript_
-- <img src="client/public/readme/vite.jpg" width="25" style="top: 8px" /> _Vite: Frontend build tool for modern web development_
-- <img src="client/public/readme/ts.png" width="25" style="top: 8px" /> _TypeScript: Typed superset of JavaScript._
+- <img src="./public/readme/npm.png" width="25" style="top: 8px" /> _npm: Node Package Manager for JavaScript_
+- <img src="./public/readme/vite.jpg" width="25" style="top: 8px" /> _Vite: Frontend build tool for modern web development_
+- <img src="./public/readme/ts.png" width="25" style="top: 8px" /> _TypeScript: Typed superset of JavaScript._
 
 #
 
 ### Tech Stack
 
-- <img src="client/public/readme/next-js.png" width="25" style="top: 8px" /> _Next.js: React framework for server-side rendering, automatic code splitting, and easy deployment_
-- <img src="client/public/readme/tailwind-css.png" width="25" style="top: 8px" /> _Tailwind CSS: Utility-first CSS framework for rapid UI development._
-- <img src="client/public/readme/mongoose.png" width="25" style="top: 8px" /> _Mongoose: MongoDB object modeling for Node.js._
-- <img src="client/public/readme/motion.png" width="25" style="top: 8px" /> Framer Motion: React animation library for smooth, high-performance UI transitions.
+- <img src="./public/readme/next-js.png" width="25" style="top: 8px" /> _Next.js: React framework for server-side rendering, automatic code splitting, and easy deployment_
+- <img src="./public/readme/tailwind-css.png" width="25" style="top: 8px" /> _Tailwind CSS: Utility-first CSS framework for rapid UI development._
+- <img src="./public/readme/mongoose.png" width="25" style="top: 8px" /> _Mongoose: MongoDB object modeling for Node.js._
+- <img src="./public/readme/motion.png" width="25" style="top: 8px" /> Framer Motion: React animation library for smooth, high-performance UI transitions.
 
 ### Interaction
 
@@ -117,17 +117,12 @@ after this you can use this file to deploy project on server.
 │ └── useWindowWidth.ts
 ├── models/
 │ └── invoice.model.ts
-├── public/
-│ └── readme
 ├── styles/
 │ └── global.css
 ├── types/
 │ └── types.ts
 ├── utils/
 │ └── numberGenerator.ts
-├── .gitignore
-├── next.config.js
-├── package.json
 └── README.md
 
 ```
